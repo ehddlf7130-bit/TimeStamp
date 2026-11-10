@@ -21,7 +21,8 @@ export class PatrolPage {
 
   private form: PlanForm;
   private size = h('select', null,
-    h('option', { value: '1080', selected: true }, '1080 × 1080'),
+    h('option', { value: '3240', selected: true }, '3240 × 3240 (원본과 동일)'),
+    h('option', { value: '1080' }, '1080 × 1080'),
     h('option', { value: '1536' }, '1536 × 1536'),
     h('option', { value: '0' }, '카메라 최대'));
   private autoShare = h('input', { type: 'checkbox' });
@@ -91,10 +92,11 @@ export class PatrolPage {
       const [session, shots] = await Promise.all([loadSession(), loadShots()]);
       if (session) {
         this.plan = planFrom(session);
-        this.session = session;
+        // Upgrade the former low-resolution default once; retain later choices.
+        this.session = { ...session, size: session.resolutionVersion ? session.size : session.size === 1080 ? 3240 : session.size, resolutionVersion: 1 };
         this.shots = shots.sort((a, b) => a.time - b.time);
         this.form.set(session);
-        this.size.value = String(session.size);
+        this.size.value = String(this.session.size);
         this.autoShare.checked = session.autoShare;
         this.slot = this.nextSlot();
         if (shots.length) this.show('gallery');
@@ -155,7 +157,7 @@ export class PatrolPage {
     if (this.shots.length && !confirm(`진행 중인 순찰의 사진 ${this.shots.length}장이 삭제됩니다. 새 순찰을 시작할까요?`)) return;
     this.startButton.disabled = true;
     try {
-      const session: PatrolSession = { ...this.form.get(), size: Number(this.size.value), autoShare: this.autoShare.checked, nextSlot: 0 };
+      const session: PatrolSession = { ...this.form.get(), size: Number(this.size.value), autoShare: this.autoShare.checked, nextSlot: 0, resolutionVersion: 1 };
       await startPatrol(session);
       this.revokeAll(); this.shots = [];
       this.plan = plan; this.session = session; this.slot = 0;

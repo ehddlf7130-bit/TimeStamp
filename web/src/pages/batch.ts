@@ -32,7 +32,7 @@ export class BatchPage {
   private previewCaption = h('p', { class: 'caption' });
   private assignBtn = h('button', { class: 'secondary', onclick: () => this.assignSelected() }, '선택 사진을 이 시간에 배치');
   private clearBtn = h('button', { class: 'ghost', onclick: () => this.clearSlot() }, '이 시간 비우기');
-  private size = h('select', null, ['1080', '1536', '3240', '0'].map((v) => h('option', { value: v, selected: v === '1080' }, v === '0' ? '원본 크기' : `${v} × ${v}`)));
+  private size = h('select', null, ['3240', '1080', '1536', '0'].map((v) => h('option', { value: v, selected: v === '3240' }, v === '0' ? '원본 크기' : `${v} × ${v}${v === '3240' ? ' (원본과 동일)' : ''}`)));
   private format = h('select', null, h('option', { value: 'jpg' }, 'JPG'), h('option', { value: 'png' }, 'PNG'));
   private shareBtn = h('button', { class: 'primary', onclick: () => this.export('share') }, '모두 저장 (공유)');
   private zipBtn = h('button', { class: 'secondary', onclick: () => this.export('zip') }, 'ZIP 다운로드');

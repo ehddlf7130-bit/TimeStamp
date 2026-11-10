@@ -88,6 +88,7 @@ try {
   await visible().locator('input[type=time]').nth(0).fill('23:00');
   await visible().locator('input[type=time]').nth(1).fill('23:30');
   check(await visible().locator('input[type=text]').count() === 0, 'the original v1.1 logo is fixed without a replacement label field');
+  check(await visible().locator('select').inputValue() === '3240', 'camera defaults to the original 3240 resolution');
   await visible().getByRole('button', { name: '순찰 시작', exact: true }).click();
   await page.waitForFunction(() => document.querySelector('.camera video')?.videoWidth > 0);
   const capture = async () => {
@@ -115,7 +116,8 @@ try {
     window.__stampGlyphFiles = [];
     const draw = CanvasRenderingContext2D.prototype.drawImage;
     CanvasRenderingContext2D.prototype.drawImage = function (...args) {
-      if (this.canvas.width === 1080 && args[0] instanceof HTMLImageElement) {
+      if (this.canvas.width === 3240 && args.length === 9 && args[0] instanceof HTMLCanvasElement) window.__captureCanvas = this.canvas;
+      if (this.canvas === window.__captureCanvas && args[0] instanceof HTMLImageElement) {
         window.__stampGlyphFiles.push(args[0].src.split('/stamp/')[1]);
       }
       return draw.apply(this, args);
@@ -169,6 +171,11 @@ try {
   check(names.join() === '001_20261109_2305.jpg,002_20261109_2310.jpg,003_20261109_2315.jpg,004_20261109_2320.jpg,005_20261109_2325.jpg,006_20261109_2330.jpg', 'patrol ZIP contains all six planned times from 23:05 through 23:30');
   const first = files[names[0]];
   check(first[0] === 0xff && first[1] === 0xd8 && first.length > 10_000, 'patrol ZIP contains real JPEG photos');
+  const dimensions = async (bytes) => page.evaluate(async (bytes) => {
+    const img = await createImageBitmap(new Blob([new Uint8Array(bytes)]));
+    const size = [img.width, img.height]; img.close(); return size.join('x');
+  }, [...bytes]);
+  check(await dimensions(first) === '3240x3240', 'saved camera JPEG has the original 3240x3240 dimensions');
   writeFileSync(join(out, 'patrol-001.jpg'), first);
 
   await visible().locator('.grid .tile').nth(1).click();
@@ -218,6 +225,20 @@ try {
   await capture();
   const migrated = await stored();
   check(migrated.shots.length === 2 && migrated.shots.some((s) => s.id === 1 && s.time === Date.UTC(2026, 10, 9, 20, 5) && s.slotIndex === undefined), 'new planned captures do not overwrite legacy photos or change their recorded time');
+  check(await page.evaluate(() => new Promise((resolve, reject) => {
+    const req = indexedDB.open('patrol-camera', 1);
+    req.onerror = () => reject(req.error);
+    req.onsuccess = () => {
+      const db = req.result; const t = db.transaction(['shots', 'meta']);
+      const session = t.objectStore('meta').get('session'); const shots = t.objectStore('shots').getAll();
+      t.oncomplete = async () => {
+        db.close();
+        const photo = await createImageBitmap(shots.result.find(s => s.slotIndex === 0).blob);
+        resolve(session.result.size === 3240 && session.result.resolutionVersion === 1 && photo.width === 3240);
+        photo.close();
+      };
+    };
+  })), 'resuming an old 1080 session upgrades new captures to 3240 without deleting old photos');
   await page.locator('.cam-top').getByRole('button', { name: '보관함', exact: true }).click();
 
   // Generate fixtures in the browser so CI never needs the user's source photos.
@@ -229,6 +250,7 @@ try {
     return { square, rectangle: c.toDataURL('image/png').split(',')[1] };
   });
   await tab('스탬프 찍기');
+  check(await visible().locator('select').first().inputValue() === '3240', 'batch exports also default to 3240');
   await visible().locator('input[type=date]').fill('2026-11-09');
   await visible().locator('input[type=time]').nth(0).fill('00:00');
   await visible().locator('input[type=time]').nth(1).fill('00:30');
@@ -244,6 +266,7 @@ try {
   const batchZip = await zipFiles(visible().getByRole('button', { name: 'ZIP 다운로드', exact: true }));
   const batchNames = Object.keys(batchZip).sort();
   check(batchNames.length === 6 && batchNames[0] === '001_20261109_0005.jpg' && batchNames[5] === '006_20261109_0030.jpg', 'batch ZIP names follow planned times');
+  check(await dimensions(batchZip[batchNames[0]]) === '3240x3240', 'batch JPEG has the same resolution as camera exports');
   writeFileSync(join(out, 'batch-001.jpg'), batchZip[batchNames[0]]);
   await page.screenshot({ path: join(out, 'mobile-batch.png'), fullPage: true });
   await visible().locator('.strip .thumb').nth(0).click();
@@ -253,8 +276,10 @@ try {
   await visible().getByRole('button', { name: '랜덤 배치', exact: true }).click();
   check(await visible().locator('.slot:not(.empty)').count() === 6, 'random placement fills all six slots');
   await visible().locator('select').nth(1).selectOption('png');
+  await visible().locator('select').first().selectOption('1080');
   const pngZip = await zipFiles(visible().getByRole('button', { name: 'ZIP 다운로드', exact: true }));
   check(Object.keys(pngZip).length === 6 && Object.values(pngZip).every((b) => b[0] === 137 && b[1] === 80 && b[2] === 78 && b[3] === 71), 'PNG export contains six valid PNG images');
+  check(await dimensions(Object.values(pngZip)[0]) === '1080x1080', 'explicit smaller exports remain available');
   check(errors.length === 0, 'no browser errors or failed HTTP responses' + (errors.length ? ': ' + errors.join(' | ') : ''));
   await ctx.close();
 } catch (e) {

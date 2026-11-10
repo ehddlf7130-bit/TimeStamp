@@ -57,6 +57,24 @@ async function run() {
   }
   await compare(renderer, 'white-background.png', wall(2027, 3, 3, 9, 7), 1080, true);
 
+  // At equal viewing size the 1080/1536 stamp must retain the edge weight and
+  // placement of the 3240 original, including the date/time from the reported case.
+  const black = makeCanvas(8, 8); black.getContext('2d')!.fillRect(0, 0, 8, 8);
+  const sampleTime = wall(2026, 11, 11, 0, 35);
+  const native = renderer.render(black, centerCrop(8, 8), sampleTime, 3240);
+  for (const size of [1080, 1536]) {
+    const expected = makeCanvas(size, size), g = expected.getContext('2d')!;
+    g.imageSmoothingQuality = 'high'; g.drawImage(native, 0, 0, size, size);
+    const actual = renderer.render(black, centerCrop(8, 8), sampleTime, size);
+    const a = actual.getContext('2d')!.getImageData(0, 0, size, size).data;
+    const b = g.getImageData(0, 0, size, size).data;
+    let max = 0;
+    for (let i = 0; i < a.length; i += 4) max = Math.max(max, Math.abs(a[i] - b[i]));
+    check(`${size}px stamp matches the reduced 3240 original (max ${max}/255)`, max <= 1);
+    release(expected); release(actual);
+  }
+  release(black); release(native);
+
   const photo = makeCanvas(8, 8);
   const pg = photo.getContext('2d')!; pg.fillStyle = '#336699'; pg.fillRect(0, 0, 8, 8);
   const time = wall(2026, 11, 9, 23, 5);

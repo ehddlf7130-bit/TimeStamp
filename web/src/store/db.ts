@@ -7,6 +7,7 @@ export interface PatrolSession {
   size: number;      // output px, 0 = camera maximum
   autoShare: boolean;
   nextSlot?: number; // next planned slot; optional for sessions saved by the old version
+  resolutionVersion?: 1; // distinguishes the old 1080 default from an explicit new choice
 }
 
 /** New shots use the planned time; legacy shots have no slotIndex and keep their original time. */

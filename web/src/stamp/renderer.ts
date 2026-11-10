@@ -72,6 +72,16 @@ export class StampRenderer {
   }
 
   private drawStamp(ctx: CanvasRenderingContext2D, time: Wall, size: number) {
+    // Assemble at the original resolution before resampling. Scaling each glyph
+    // separately changes edge weight and rounds its fractional position differently.
+    if (size !== this.data.referenceSize) {
+      const stamp = makeCanvas(this.data.referenceSize, this.data.referenceSize);
+      try {
+        this.drawStamp(context(stamp), time, this.data.referenceSize);
+        ctx.drawImage(stamp, 0, 0, size, size);
+      } finally { release(stamp); }
+      return;
+    }
     const elements = layoutStamp(this.data, time);
     this.logoShadow ??= this.makeShadow([this.logo], this.data.logoShadow);
     const key = `${stampDate(time)} ${stampTime(time)}`;
