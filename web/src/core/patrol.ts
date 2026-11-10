@@ -98,24 +98,15 @@ export function koreaToday(now = new Date()): string {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
 }
 
-/** Current Korean wall-clock time (Korea has no DST: UTC+9). */
-export function koreaNow(now = new Date()): Wall {
-  return new Date(now.getTime() + 9 * 60 * MINUTE);
-}
-
-/** Truncate to the minute shown on the stamp. */
-export function floorMinute(v: Wall): Wall {
-  return new Date(Math.floor(v.getTime() / MINUTE) * MINUTE);
-}
-
-/** Each slot accepts photos taken within ±2.5 minutes of it. */
-export const SLOT_WINDOW_MS = 2.5 * MINUTE;
-
-/** Index of the plan slot a photo taken at `time` confirms, or -1 if it falls outside the patrol. */
-export function matchSlot(plan: PatrolPlan, time: Wall): number {
-  const first = plan.slots[0].getTime();
-  const i = Math.max(0, Math.min(plan.count - 1, Math.round((time.getTime() - first) / (5 * MINUTE))));
-  return Math.abs(time.getTime() - plan.slots[i].getTime()) <= SLOT_WINDOW_MS ? i : -1;
+/** Next unfilled planned slot, wrapping once. `count` means all slots are filled. */
+export function nextPendingSlot(count: number, completed: Iterable<number>, from = 0): number {
+  const taken = new Set(completed);
+  const start = Number.isInteger(from) && from >= 0 && from < count ? from : 0;
+  for (let offset = 0; offset < count; offset++) {
+    const index = (start + offset) % count;
+    if (!taken.has(index)) return index;
+  }
+  return count;
 }
 
 export function exportFileName(index: number, time: Wall): string {

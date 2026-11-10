@@ -6,10 +6,11 @@ export interface PatrolSession {
   end: string;       // HH:mm
   size: number;      // output px, 0 = camera maximum
   autoShare: boolean;
+  nextSlot?: number; // next planned slot; optional for sessions saved by the old version
 }
 
-/** One photo. `time` is the Korean wall-clock moment the shutter was pressed (ms). */
-export interface Shot { id: number; time: number; blob: Blob; thumb: Blob }
+/** New shots use the planned time; legacy shots have no slotIndex and keep their original time. */
+export interface Shot { id: number; time: number; slotIndex?: number; blob: Blob; thumb: Blob }
 
 const DB = 'patrol-camera';
 let opening: Promise<IDBDatabase> | undefined;
@@ -41,12 +42,35 @@ async function tx<T>(store: string, mode: IDBTransactionMode, fn: (s: IDBObjectS
 export const loadSession = () => tx<PatrolSession | undefined>('meta', 'readonly', (s) => s.get('session'));
 export const saveSession = (v: PatrolSession) => tx('meta', 'readwrite', (s) => { s.put(v, 'session'); });
 export const loadShots = () => tx<Shot[]>('shots', 'readonly', (s) => s.getAll());
-export const saveShot = (v: Shot) => tx('shots', 'readwrite', (s) => { s.put(v); });
 export const deleteShot = (id: number) => tx('shots', 'readwrite', (s) => { s.delete(id); });
 
-export async function clearPatrol() {
-  await tx('shots', 'readwrite', (s) => { s.clear(); });
-  await tx('meta', 'readwrite', (s) => { s.delete('session'); });
+/** Photos and progress must commit together, including when storage is full. */
+async function writePatrol(action: (t: IDBTransaction) => void): Promise<void> {
+  const db = await open();
+  return new Promise((resolve, reject) => {
+    const t = db.transaction(['shots', 'meta'], 'readwrite');
+    t.oncomplete = () => resolve();
+    t.onerror = () => reject(t.error);
+    t.onabort = () => reject(t.error ?? new Error('저장 공간이 부족합니다.'));
+    try { action(t); } catch (e) { t.abort(); reject(e); }
+  });
+}
+
+export const saveCapture = (shot: Shot, session: PatrolSession) => writePatrol((t) => {
+  t.objectStore('shots').put(shot);
+  t.objectStore('meta').put(session, 'session');
+});
+
+export const startPatrol = (session: PatrolSession) => writePatrol((t) => {
+  t.objectStore('shots').clear();
+  t.objectStore('meta').put(session, 'session');
+});
+
+export function clearPatrol() {
+  return writePatrol((t) => {
+    t.objectStore('shots').clear();
+    t.objectStore('meta').delete('session');
+  });
 }
 
 /** Ask Safari not to evict stored photos under storage pressure. */

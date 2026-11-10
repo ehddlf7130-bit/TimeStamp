@@ -1,6 +1,6 @@
 // Port of tests/TimeStamp.Checks/Program.cs.
 import { describe, expect, it } from 'vitest';
-import { addMinutes, arrange, assign, createPlan, exportName, exportFileName, floorMinute, hhmm, isoDate, koreaNow, koreaToday, matchSlot, PlanError, SLOT_WINDOW_MS, stampDate, stampTime, wall } from '../src/core/patrol';
+import { addMinutes, arrange, assign, createPlan, exportName, hhmm, isoDate, koreaToday, nextPendingSlot, PlanError, stampDate, stampTime, wall } from '../src/core/patrol';
 
 const date = wall(2026, 11, 9);
 const minutes = (a: Date, b: Date) => (b.getTime() - a.getTime()) / 60_000;
@@ -61,35 +61,40 @@ describe('StampText', () => {
   it('Korea today ignores device time zone', () => expect(koreaToday(new Date('2026-11-09T16:00:00Z'))).toBe('2026-11-10'));
 });
 
-describe('live patrol time', () => {
-  const plan = createPlan(date, '20:00', '20:30');
-  it('uses the current Korean wall clock across midnight', () => {
-    expect(koreaNow(new Date('2026-11-09T15:05:12.345Z')).toISOString()).toBe('2026-11-10T00:05:12.345Z');
+describe('planned patrol capture', () => {
+  it('23:00–23:30 produces exactly the six requested stamp times', () => {
+    const plan = createPlan(date, '23:00', '23:30');
+    expect(plan.slots.map(hhmm)).toEqual(['23:05', '23:10', '23:15', '23:20', '23:25', '23:30']);
   });
-  it('truncates the visible stamp to the minute without changing the recorded instant', () => {
-    const time = koreaNow(new Date('2026-11-09T11:05:12.345Z'));
-    expect(floorMinute(time)).toEqual(wall(2026, 11, 9, 20, 5));
-    expect(exportFileName(1, time)).toBe('002_20261109_200512.jpg');
-    expect(time.getUTCMilliseconds()).toBe(345);
+  it('starts at the first slot and advances after each saved shot', () => {
+    const filled = new Set<number>();
+    for (let i = 0; i < 6; i++) {
+      expect(nextPendingSlot(6, filled, i)).toBe(i);
+      filled.add(i);
+      expect(nextPendingSlot(6, filled, i)).toBe(i + 1);
+    }
   });
-  it('confirms the nearest slot', () => {
-    expect(matchSlot(plan, wall(2026, 11, 9, 20, 4))).toBe(0);
-    expect(matchSlot(plan, wall(2026, 11, 9, 20, 11))).toBe(1);
+  it('retaking an earlier photo preserves the next pending slot', () => {
+    expect(nextPendingSlot(6, [0, 1, 2], 3)).toBe(3);
+    expect(nextPendingSlot(6, [0, 1, 2, 0], 3)).toBe(3);
   });
-  it('assigns an internal midpoint to the later slot', () => {
-    expect(matchSlot(plan, new Date(plan.slots[0].getTime() + SLOT_WINDOW_MS))).toBe(1);
+  it('recovers an unfilled slot after deleting a completed photo', () => {
+    expect(nextPendingSlot(6, [0, 1, 3, 4, 5], 6)).toBe(2);
   });
-  it('accepts both outer window boundaries', () => {
-    expect(matchSlot(plan, new Date(plan.slots[0].getTime() - SLOT_WINDOW_MS))).toBe(0);
-    expect(matchSlot(plan, new Date(plan.end.getTime() + SLOT_WINDOW_MS))).toBe(5);
+  it('wraps to any earlier hole and skips already filled slots', () => {
+    expect(nextPendingSlot(6, [1, 2, 3, 4, 5], 5)).toBe(0);
   });
-  it('rejects photos outside the patrol window', () => {
-    expect(matchSlot(plan, new Date(plan.slots[0].getTime() - SLOT_WINDOW_MS - 1))).toBe(-1);
-    expect(matchSlot(plan, new Date(plan.end.getTime() + SLOT_WINDOW_MS + 1))).toBe(-1);
+  it('returns the completion marker without generating a seventh slot', () => {
+    expect(nextPendingSlot(6, [0, 1, 2, 3, 4, 5])).toBe(6);
   });
-  it('matches slots after midnight', () => {
-    const night = createPlan(date, '23:55', '00:10');
-    expect(matchSlot(night, wall(2026, 11, 10, 0, 5))).toBe(1);
+  it('restores the first unfilled slot when an old session has no cursor', () => {
+    expect(nextPendingSlot(6, [0, 1], undefined)).toBe(2);
+  });
+  it('uses the next date when the planned sequence crosses midnight', () => {
+    const plan = createPlan(date, '23:50', '00:10');
+    expect(plan.slots.map((t, i) => exportName(i, t, false))).toEqual([
+      '001_20261109_2355.jpg', '002_20261110_0000.jpg', '003_20261110_0005.jpg', '004_20261110_0010.jpg',
+    ]);
   });
 });
 

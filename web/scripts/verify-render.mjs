@@ -81,8 +81,8 @@ try {
 
   await tab('순찰 촬영');
   await visible().locator('input[type=date]').fill('2026-11-09');
-  await visible().locator('input[type=time]').nth(0).fill('20:00');
-  await visible().locator('input[type=time]').nth(1).fill('20:30');
+  await visible().locator('input[type=time]').nth(0).fill('23:00');
+  await visible().locator('input[type=time]').nth(1).fill('23:30');
   const patrolLabel = visible().locator('input[type=text]');
   await patrolLabel.fill('야간 순찰');
   await patrolLabel.blur();
@@ -92,46 +92,130 @@ try {
   await tab('순찰 촬영');
   await visible().getByRole('button', { name: '순찰 시작', exact: true }).click();
   await page.waitForFunction(() => document.querySelector('.camera video')?.videoWidth > 0);
-  const capture = async (iso) => {
-    await clock(iso);
+  const capture = async () => {
     await page.locator('.shutter').click();
     await page.waitForFunction(() => !document.querySelector('.shutter').classList.contains('working'));
   };
-  await capture('2026-11-09T11:05:10Z');
-  await page.waitForFunction(() => document.querySelector('.cam-title')?.textContent.includes('확인 1 / 6'));
-  check(await page.locator('.cam-strip .cell.taken').count() === 1, 'live photo confirms the current patrol slot');
-  await capture('2026-11-09T11:05:30Z');
-  check(await page.locator('.cam-strip .cell.taken').count() === 1, 'two photos in one window confirm only one slot');
-  await capture('2026-11-09T11:10:20Z');
-  check(await page.locator('.cam-strip .cell.taken').count() === 2, 'a later real-time photo confirms the next slot');
+  const stored = () => page.evaluate(() => new Promise((resolve, reject) => {
+    const req = indexedDB.open('patrol-camera', 1);
+    req.onerror = () => reject(req.error);
+    req.onsuccess = () => {
+      const db = req.result;
+      const t = db.transaction(['shots', 'meta'], 'readonly');
+      const shots = t.objectStore('shots').getAll();
+      const session = t.objectStore('meta').get('session');
+      t.oncomplete = () => {
+        resolve({ shots: shots.result.map(({ id, time, slotIndex }) => ({ id, time, slotIndex })), nextSlot: session.result?.nextSlot });
+        db.close();
+      };
+      t.onerror = () => reject(t.error);
+    };
+  }));
+  const title = () => page.locator('.cam-title').innerText();
+  check((await title()).includes('1 / 6') && (await title()).includes('오후 11:05'), '23:00–23:30 starts at planned 23:05 despite the clock being 20:05');
+  await page.evaluate(() => {
+    window.__stampDrawTexts = [];
+    const draw = CanvasRenderingContext2D.prototype.fillText;
+    CanvasRenderingContext2D.prototype.fillText = function (...args) {
+      if (this.canvas.width === 1080) window.__stampDrawTexts.push(args[0]);
+      return draw.apply(this, args);
+    };
+    // Fail the session write after the photo write has been queued: both must roll back.
+    const put = IDBObjectStore.prototype.put;
+    IDBObjectStore.prototype.put = function (...args) {
+      if (this.name === 'meta') {
+        IDBObjectStore.prototype.put = put;
+        throw new DOMException('Simulated full storage', 'QuotaExceededError');
+      }
+      return put.apply(this, args);
+    };
+  });
+  await capture();
+  const failedCapture = await stored();
+  check(failedCapture.shots.length === 0 && failedCapture.nextSlot === 0 && (await title()).includes('1 / 6'), 'a failed save rolls back the photo and does not advance the planned time');
+  await capture();
+  check((await title()).includes('2 / 6') && (await title()).includes('오후 11:10'), 'first saved photo advances immediately to 23:10');
+  check(await page.evaluate(() => window.__stampDrawTexts.includes('오후 11:05') && !window.__stampDrawTexts.includes('오후 8:05')), 'the exported photo canvas draws the planned time rather than the live clock');
+  await capture();
+  await capture();
+  check(await page.locator('.cam-strip .cell.taken').count() === 3 && (await title()).includes('오후 11:20'), 'three immediate captures advance to 23:20 without waiting five minutes');
   const shutterBox = await page.locator('.shutter').boundingBox();
   const thumbnailBox = await page.locator('.cam-last').boundingBox();
   check(Math.abs(shutterBox.x + shutterBox.width / 2 - 195) < 2 && thumbnailBox.x + thumbnailBox.width < shutterBox.x,
     'the shutter stays centered and the gallery thumbnail does not overlap it');
   await page.screenshot({ path: join(out, 'mobile-camera.png') });
-  await capture('2026-11-09T11:40:00Z');
-  check(await page.locator('.cam-strip .cell.taken').count() === 2, 'outside-window photos do not confirm a patrol slot');
-  await page.locator('.cam-top').getByRole('button', { name: '보관함', exact: true }).click();
-  check(await visible().locator('.grid .tile').count() === 4, 'all four photos, including repeated and outside-window shots, are retained');
-  check(await page.evaluate(() => document.querySelector('.camera video').srcObject === null), 'leaving the camera releases the media stream');
+  const beforeRetake = await stored();
+  await page.locator('.cam-strip .cell').nth(1).click();
+  check((await title()).includes('오후 11:10') && (await title()).includes('다시 찍기'), 'tapping a filled time selects it for retaking');
+  await capture();
+  const afterRetake = await stored();
+  check(afterRetake.shots.length === 3 && afterRetake.shots.map((s) => s.id).join() === beforeRetake.shots.map((s) => s.id).join() && (await title()).includes('오후 11:20'), 'retake replaces one photo and returns to the next pending time');
   await page.reload();
   await page.waitForSelector('.grid .tile');
-  check(await visible().locator('.grid .tile').count() === 4, 'reload restores the session and all photos from IndexedDB');
+  check(await visible().locator('.grid .tile').count() === 3, 'reload restores the session and three planned photos');
   await page.screenshot({ path: join(out, 'mobile-gallery.png'), fullPage: true });
+  await visible().getByRole('button', { name: '이어서 촬영', exact: true }).click();
+  await page.waitForFunction(() => document.querySelector('.camera video')?.videoWidth > 0);
+  check((await title()).includes('4 / 6') && (await title()).includes('오후 11:20'), 'resuming after reload continues at planned 23:20');
+  for (let i = 0; i < 3; i++) await capture();
+  await page.waitForSelector('.grid .tile');
+  check(await visible().locator('.grid .tile').count() === 6 && (await stored()).nextSlot === 6, 'the sixth photo completes the plan and opens the gallery without a seventh slot');
+  check(await page.evaluate(() => document.querySelector('.camera video').srcObject === null), 'completing the plan releases the camera');
   const files = await zipFiles(visible().getByRole('button', { name: 'ZIP 다운로드', exact: true }));
   const names = Object.keys(files).sort();
-  check(names.join() === '001_20261109_200510.jpg,002_20261109_200530.jpg,003_20261109_201020.jpg,004_20261109_204000.jpg', 'patrol ZIP uses actual Korean capture times, including seconds');
+  check(names.join() === '001_20261109_2305.jpg,002_20261109_2310.jpg,003_20261109_2315.jpg,004_20261109_2320.jpg,005_20261109_2325.jpg,006_20261109_2330.jpg', 'patrol ZIP contains all six planned times from 23:05 through 23:30');
   const first = files[names[0]];
   check(first[0] === 0xff && first[1] === 0xd8 && first.length > 10_000, 'patrol ZIP contains real JPEG photos');
   writeFileSync(join(out, 'patrol-001.jpg'), first);
 
+  await visible().locator('.grid .tile').nth(1).click();
+  await page.locator('dialog').getByRole('button', { name: '삭제', exact: true }).click();
+  check(await visible().locator('.grid .tile').count() === 5, 'deleting a planned photo leaves its time available');
+  await visible().getByRole('button', { name: '이어서 촬영', exact: true }).click();
+  await page.waitForFunction(() => document.querySelector('.camera video')?.videoWidth > 0);
+  check((await title()).includes('오후 11:10'), 'resuming a completed plan after deletion finds the missing 23:10 slot');
+  await capture();
+  check(await visible().locator('.grid .tile').count() === 6, 'replacing the deleted time completes the plan again');
+
   await visible().getByRole('button', { name: '새 순찰 시작', exact: true }).click();
   check(await visible().locator('input[type=text]').inputValue() === '야간 순찰', 'reload restores the saved label');
-  await visible().locator('input[type=time]').nth(0).fill('21:00');
-  await visible().locator('input[type=time]').nth(1).fill('21:30');
+  await visible().locator('input[type=time]').nth(0).fill('23:50');
+  await visible().locator('input[type=time]').nth(1).fill('00:10');
   await visible().getByRole('button', { name: '순찰 시작', exact: true }).click();
   await page.waitForFunction(() => document.querySelector('.camera video')?.videoWidth > 0);
-  check((await page.locator('.cam-strip').innerText()).includes('9:05'), 'starting another plan updates the camera time strip');
+  check((await title()).includes('1 / 4') && (await title()).includes('오후 11:55'), 'starting an overnight plan replaces the camera time strip');
+  for (let i = 0; i < 4; i++) await capture();
+  const overnight = await zipFiles(visible().getByRole('button', { name: 'ZIP 다운로드', exact: true }));
+  check(Object.keys(overnight).sort().join() === '001_20261109_2355.jpg,002_20261110_0000.jpg,003_20261110_0005.jpg,004_20261110_0010.jpg', 'planned captures roll over the date at midnight');
+
+  // Restore a session created by the old real-time version, retaining its actual photo bytes.
+  await page.evaluate(() => new Promise((resolve, reject) => {
+    const req = indexedDB.open('patrol-camera', 1);
+    req.onsuccess = () => {
+      const db = req.result;
+      const t = db.transaction(['shots', 'meta'], 'readwrite');
+      const s = t.objectStore('shots');
+      const read = s.getAll();
+      read.onsuccess = () => {
+        const old = read.result[0];
+        s.clear();
+        s.put({ id: 1, time: Date.UTC(2026, 10, 9, 20, 5), blob: old.blob, thumb: old.thumb });
+        t.objectStore('meta').put({ date: '2026-11-09', start: '23:00', end: '23:30', size: 1080, autoShare: false }, 'session');
+      };
+      t.oncomplete = () => { db.close(); resolve(); };
+      t.onerror = () => reject(t.error);
+    };
+    req.onerror = () => reject(req.error);
+  }));
+  await page.reload();
+  await page.waitForSelector('.grid .tile');
+  check(await visible().locator('.grid .tile').count() === 1 && (await visible().innerText()).includes('이전 버전에서 찍은 사진 1장'), 'old real-time photos remain available after updating');
+  await visible().getByRole('button', { name: '이어서 촬영', exact: true }).click();
+  await page.waitForFunction(() => document.querySelector('.camera video')?.videoWidth > 0);
+  check((await title()).includes('1 / 6') && (await title()).includes('오후 11:05'), 'an old session resumes the new planned sequence at its first time');
+  await capture();
+  const migrated = await stored();
+  check(migrated.shots.length === 2 && migrated.shots.some((s) => s.id === 1 && s.time === Date.UTC(2026, 10, 9, 20, 5) && s.slotIndex === undefined), 'new planned captures do not overwrite legacy photos or change their recorded time');
   await page.locator('.cam-top').getByRole('button', { name: '보관함', exact: true }).click();
 
   // Generate fixtures in the browser so CI never needs the user's source photos.
