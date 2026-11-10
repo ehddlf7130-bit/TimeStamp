@@ -1,0 +1,10 @@
+PASS mon: source hash, dimensions, labeled partitions, exact fixed-overlay reconstruction
+PASS tue: source hash, dimensions, labeled partitions, exact fixed-overlay reconstruction
+PASS wed: source hash, dimensions, labeled partitions, exact fixed-overlay reconstruction
+PASS thu: source hash, dimensions, labeled partitions, exact fixed-overlay reconstruction
+PASS fri: source hash, dimensions, labeled partitions, exact fixed-overlay reconstruction
+PASS sat: source hash, dimensions, labeled partitions, exact fixed-overlay reconstruction
+PASS sun: source hash, dimensions, labeled partitions, exact fixed-overlay reconstruction
+PASS single_digit_date: source hash, dimensions, labeled partitions, exact fixed-overlay reconstruction
+PASS 38 canonical assets; 155 occurrences; atlas pixels
+Scope: extracted data/fixed references only. Arbitrary dates, original font/alpha and bright backgrounds are NOT verified.

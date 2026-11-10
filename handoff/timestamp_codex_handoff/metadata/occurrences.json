@@ -1,0 +1,4342 @@
+[
+  {
+    "id": "mon_date_000",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/mon/date_000_0032.png",
+    "source_box": [
+      170,
+      2435,
+      254,
+      2638
+    ],
+    "size": [
+      84,
+      203
+    ],
+    "core_box_in_asset": [
+      5,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_001",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "0",
+    "file": "assets/occurrences/mon/date_001_0030.png",
+    "source_box": [
+      254,
+      2435,
+      336,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      34,
+      80,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_002",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/mon/date_002_0032.png",
+    "source_box": [
+      336,
+      2435,
+      419,
+      2638
+    ],
+    "size": [
+      83,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_003",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "6",
+    "file": "assets/occurrences/mon/date_003_0036.png",
+    "source_box": [
+      419,
+      2435,
+      509,
+      2638
+    ],
+    "size": [
+      90,
+      203
+    ],
+    "core_box_in_asset": [
+      4,
+      34,
+      83,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_004",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "년",
+    "file": "assets/occurrences/mon/date_004_b144.png",
+    "source_box": [
+      509,
+      2435,
+      670,
+      2638
+    ],
+    "size": [
+      161,
+      203
+    ],
+    "core_box_in_asset": [
+      7,
+      16,
+      131,
+      167
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_005",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/mon/date_005_0031.png",
+    "source_box": [
+      670,
+      2435,
+      768,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_006",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/mon/date_006_0031.png",
+    "source_box": [
+      768,
+      2435,
+      850,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      16,
+      34,
+      67,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_007",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "월",
+    "file": "assets/occurrences/mon/date_007_c6d4.png",
+    "source_box": [
+      850,
+      2435,
+      1027,
+      2638
+    ],
+    "size": [
+      177,
+      203
+    ],
+    "core_box_in_asset": [
+      15,
+      16,
+      152,
+      172
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_008",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "9",
+    "file": "assets/occurrences/mon/date_008_0039.png",
+    "source_box": [
+      1027,
+      2435,
+      1137,
+      2638
+    ],
+    "size": [
+      110,
+      203
+    ],
+    "core_box_in_asset": [
+      26,
+      34,
+      105,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_009",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "일",
+    "file": "assets/occurrences/mon/date_009_c77c.png",
+    "source_box": [
+      1137,
+      2435,
+      1303,
+      2638
+    ],
+    "size": [
+      166,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      136,
+      170
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_010",
+    "sample_id": "mon",
+    "category": "weekday_token",
+    "text": "(월)",
+    "file": "assets/occurrences/mon/date_010_0028_c6d4_0029.png",
+    "source_box": [
+      1303,
+      2435,
+      1575,
+      2638
+    ],
+    "size": [
+      272,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      16,
+      267,
+      189
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_time_011",
+    "sample_id": "mon",
+    "category": "time_glyph",
+    "text": "오",
+    "file": "assets/occurrences/mon/time_011_c624.png",
+    "source_box": [
+      173,
+      2640,
+      321,
+      2830
+    ],
+    "size": [
+      148,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      25,
+      145,
+      151
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_time_012",
+    "sample_id": "mon",
+    "category": "time_glyph",
+    "text": "후",
+    "file": "assets/occurrences/mon/time_012_d6c4.png",
+    "source_box": [
+      320,
+      2640,
+      468,
+      2830
+    ],
+    "size": [
+      148,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      18,
+      144,
+      171
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_time_013",
+    "sample_id": "mon",
+    "category": "period_token",
+    "text": "오후",
+    "file": "assets/occurrences/mon/time_013_c624_d6c4.png",
+    "source_box": [
+      172,
+      2640,
+      489,
+      2830
+    ],
+    "size": [
+      317,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      18,
+      292,
+      171
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_time_014",
+    "sample_id": "mon",
+    "category": "time_glyph",
+    "text": "8",
+    "file": "assets/occurrences/mon/time_014_0038.png",
+    "source_box": [
+      489,
+      2640,
+      599,
+      2830
+    ],
+    "size": [
+      110,
+      190
+    ],
+    "core_box_in_asset": [
+      26,
+      33,
+      105,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_time_015",
+    "sample_id": "mon",
+    "category": "time_glyph",
+    "text": ":",
+    "file": "assets/occurrences/mon/time_015_003a.png",
+    "source_box": [
+      599,
+      2640,
+      633,
+      2830
+    ],
+    "size": [
+      34,
+      190
+    ],
+    "core_box_in_asset": [
+      6,
+      66,
+      30,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_time_016",
+    "sample_id": "mon",
+    "category": "time_glyph",
+    "text": "4",
+    "file": "assets/occurrences/mon/time_016_0034.png",
+    "source_box": [
+      633,
+      2640,
+      720,
+      2830
+    ],
+    "size": [
+      87,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      33,
+      85,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_time_017",
+    "sample_id": "mon",
+    "category": "time_glyph",
+    "text": "7",
+    "file": "assets/occurrences/mon/time_017_0037.png",
+    "source_box": [
+      720,
+      2640,
+      805,
+      2830
+    ],
+    "size": [
+      85,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      35,
+      80,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_018",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/tue/date_018_0032.png",
+    "source_box": [
+      170,
+      2435,
+      254,
+      2638
+    ],
+    "size": [
+      84,
+      203
+    ],
+    "core_box_in_asset": [
+      5,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_019",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "0",
+    "file": "assets/occurrences/tue/date_019_0030.png",
+    "source_box": [
+      254,
+      2435,
+      336,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      34,
+      80,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_020",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/tue/date_020_0032.png",
+    "source_box": [
+      336,
+      2435,
+      419,
+      2638
+    ],
+    "size": [
+      83,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_021",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "6",
+    "file": "assets/occurrences/tue/date_021_0036.png",
+    "source_box": [
+      419,
+      2435,
+      509,
+      2638
+    ],
+    "size": [
+      90,
+      203
+    ],
+    "core_box_in_asset": [
+      4,
+      34,
+      83,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_022",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "년",
+    "file": "assets/occurrences/tue/date_022_b144.png",
+    "source_box": [
+      509,
+      2435,
+      670,
+      2638
+    ],
+    "size": [
+      161,
+      203
+    ],
+    "core_box_in_asset": [
+      7,
+      16,
+      131,
+      167
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_023",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/tue/date_023_0031.png",
+    "source_box": [
+      670,
+      2435,
+      768,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_024",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/tue/date_024_0031.png",
+    "source_box": [
+      768,
+      2435,
+      850,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      16,
+      34,
+      67,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_025",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "월",
+    "file": "assets/occurrences/tue/date_025_c6d4.png",
+    "source_box": [
+      850,
+      2435,
+      1029,
+      2638
+    ],
+    "size": [
+      179,
+      203
+    ],
+    "core_box_in_asset": [
+      15,
+      16,
+      152,
+      172
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_026",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/tue/date_026_0031.png",
+    "source_box": [
+      1029,
+      2435,
+      1123,
+      2638
+    ],
+    "size": [
+      94,
+      203
+    ],
+    "core_box_in_asset": [
+      28,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_027",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "7",
+    "file": "assets/occurrences/tue/date_027_0037.png",
+    "source_box": [
+      1123,
+      2435,
+      1221,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      14,
+      36,
+      92,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_028",
+    "sample_id": "tue",
+    "category": "date_glyph",
+    "text": "일",
+    "file": "assets/occurrences/tue/date_028_c77c.png",
+    "source_box": [
+      1221,
+      2435,
+      1386,
+      2638
+    ],
+    "size": [
+      165,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      135,
+      170
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_date_029",
+    "sample_id": "tue",
+    "category": "weekday_token",
+    "text": "(화)",
+    "file": "assets/occurrences/tue/date_029_0028_d654_0029.png",
+    "source_box": [
+      1386,
+      2435,
+      1655,
+      2638
+    ],
+    "size": [
+      269,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      16,
+      264,
+      189
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_time_030",
+    "sample_id": "tue",
+    "category": "time_glyph",
+    "text": "오",
+    "file": "assets/occurrences/tue/time_030_c624.png",
+    "source_box": [
+      174,
+      2640,
+      321,
+      2830
+    ],
+    "size": [
+      147,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      25,
+      144,
+      151
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_time_031",
+    "sample_id": "tue",
+    "category": "time_glyph",
+    "text": "전",
+    "file": "assets/occurrences/tue/time_031_c804.png",
+    "source_box": [
+      321,
+      2640,
+      460,
+      2830
+    ],
+    "size": [
+      139,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      15,
+      135,
+      167
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_time_032",
+    "sample_id": "tue",
+    "category": "period_token",
+    "text": "오전",
+    "file": "assets/occurrences/tue/time_032_c624_c804.png",
+    "source_box": [
+      173,
+      2640,
+      485,
+      2830
+    ],
+    "size": [
+      312,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      15,
+      283,
+      167
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_time_033",
+    "sample_id": "tue",
+    "category": "time_glyph",
+    "text": "3",
+    "file": "assets/occurrences/tue/time_033_0033.png",
+    "source_box": [
+      485,
+      2640,
+      599,
+      2830
+    ],
+    "size": [
+      114,
+      190
+    ],
+    "core_box_in_asset": [
+      30,
+      33,
+      108,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_time_034",
+    "sample_id": "tue",
+    "category": "time_glyph",
+    "text": ":",
+    "file": "assets/occurrences/tue/time_034_003a.png",
+    "source_box": [
+      599,
+      2640,
+      634,
+      2830
+    ],
+    "size": [
+      35,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      66,
+      30,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_time_035",
+    "sample_id": "tue",
+    "category": "time_glyph",
+    "text": "5",
+    "file": "assets/occurrences/tue/time_035_0035.png",
+    "source_box": [
+      634,
+      2640,
+      718,
+      2830
+    ],
+    "size": [
+      84,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      35,
+      81,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "tue_time_036",
+    "sample_id": "tue",
+    "category": "time_glyph",
+    "text": "5",
+    "file": "assets/occurrences/tue/time_036_0035.png",
+    "source_box": [
+      718,
+      2640,
+      804,
+      2830
+    ],
+    "size": [
+      86,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      35,
+      81,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_037",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/wed/date_037_0032.png",
+    "source_box": [
+      170,
+      2435,
+      254,
+      2638
+    ],
+    "size": [
+      84,
+      203
+    ],
+    "core_box_in_asset": [
+      5,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_038",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "0",
+    "file": "assets/occurrences/wed/date_038_0030.png",
+    "source_box": [
+      254,
+      2435,
+      336,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      34,
+      80,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_039",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/wed/date_039_0032.png",
+    "source_box": [
+      336,
+      2435,
+      419,
+      2638
+    ],
+    "size": [
+      83,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_040",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "6",
+    "file": "assets/occurrences/wed/date_040_0036.png",
+    "source_box": [
+      419,
+      2435,
+      508,
+      2638
+    ],
+    "size": [
+      89,
+      203
+    ],
+    "core_box_in_asset": [
+      4,
+      34,
+      83,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_041",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "년",
+    "file": "assets/occurrences/wed/date_041_b144.png",
+    "source_box": [
+      508,
+      2435,
+      670,
+      2638
+    ],
+    "size": [
+      162,
+      203
+    ],
+    "core_box_in_asset": [
+      7,
+      16,
+      132,
+      167
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_042",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/wed/date_042_0031.png",
+    "source_box": [
+      670,
+      2435,
+      768,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_043",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/wed/date_043_0031.png",
+    "source_box": [
+      768,
+      2435,
+      850,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      16,
+      34,
+      67,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_044",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "월",
+    "file": "assets/occurrences/wed/date_044_c6d4.png",
+    "source_box": [
+      850,
+      2435,
+      1029,
+      2638
+    ],
+    "size": [
+      179,
+      203
+    ],
+    "core_box_in_asset": [
+      15,
+      16,
+      152,
+      172
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_045",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/wed/date_045_0031.png",
+    "source_box": [
+      1029,
+      2435,
+      1123,
+      2638
+    ],
+    "size": [
+      94,
+      203
+    ],
+    "core_box_in_asset": [
+      28,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_046",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "8",
+    "file": "assets/occurrences/wed/date_046_0038.png",
+    "source_box": [
+      1123,
+      2435,
+      1221,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      14,
+      34,
+      93,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_047",
+    "sample_id": "wed",
+    "category": "date_glyph",
+    "text": "일",
+    "file": "assets/occurrences/wed/date_047_c77c.png",
+    "source_box": [
+      1221,
+      2435,
+      1386,
+      2638
+    ],
+    "size": [
+      165,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      135,
+      170
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_date_048",
+    "sample_id": "wed",
+    "category": "weekday_token",
+    "text": "(수)",
+    "file": "assets/occurrences/wed/date_048_0028_c218_0029.png",
+    "source_box": [
+      1386,
+      2435,
+      1655,
+      2638
+    ],
+    "size": [
+      269,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      19,
+      264,
+      189
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_time_049",
+    "sample_id": "wed",
+    "category": "time_glyph",
+    "text": "오",
+    "file": "assets/occurrences/wed/time_049_c624.png",
+    "source_box": [
+      173,
+      2640,
+      321,
+      2830
+    ],
+    "size": [
+      148,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      25,
+      145,
+      151
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_time_050",
+    "sample_id": "wed",
+    "category": "time_glyph",
+    "text": "전",
+    "file": "assets/occurrences/wed/time_050_c804.png",
+    "source_box": [
+      321,
+      2640,
+      460,
+      2830
+    ],
+    "size": [
+      139,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      15,
+      135,
+      167
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_time_051",
+    "sample_id": "wed",
+    "category": "period_token",
+    "text": "오전",
+    "file": "assets/occurrences/wed/time_051_c624_c804.png",
+    "source_box": [
+      172,
+      2640,
+      487,
+      2830
+    ],
+    "size": [
+      315,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      15,
+      284,
+      167
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_time_052",
+    "sample_id": "wed",
+    "category": "time_glyph",
+    "text": "1",
+    "file": "assets/occurrences/wed/time_052_0031.png",
+    "source_box": [
+      487,
+      2640,
+      584,
+      2830
+    ],
+    "size": [
+      97,
+      190
+    ],
+    "core_box_in_asset": [
+      32,
+      33,
+      83,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_time_053",
+    "sample_id": "wed",
+    "category": "time_glyph",
+    "text": "0",
+    "file": "assets/occurrences/wed/time_053_0030.png",
+    "source_box": [
+      584,
+      2640,
+      681,
+      2830
+    ],
+    "size": [
+      97,
+      190
+    ],
+    "core_box_in_asset": [
+      15,
+      33,
+      93,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_time_054",
+    "sample_id": "wed",
+    "category": "time_glyph",
+    "text": ":",
+    "file": "assets/occurrences/wed/time_054_003a.png",
+    "source_box": [
+      681,
+      2640,
+      715,
+      2830
+    ],
+    "size": [
+      34,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      66,
+      28,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_time_055",
+    "sample_id": "wed",
+    "category": "time_glyph",
+    "text": "2",
+    "file": "assets/occurrences/wed/time_055_0032.png",
+    "source_box": [
+      715,
+      2640,
+      802,
+      2830
+    ],
+    "size": [
+      87,
+      190
+    ],
+    "core_box_in_asset": [
+      7,
+      33,
+      84,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "wed_time_056",
+    "sample_id": "wed",
+    "category": "time_glyph",
+    "text": "6",
+    "file": "assets/occurrences/wed/time_056_0036.png",
+    "source_box": [
+      802,
+      2640,
+      890,
+      2830
+    ],
+    "size": [
+      88,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      33,
+      83,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_057",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/thu/date_057_0032.png",
+    "source_box": [
+      170,
+      2435,
+      254,
+      2638
+    ],
+    "size": [
+      84,
+      203
+    ],
+    "core_box_in_asset": [
+      5,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_058",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "0",
+    "file": "assets/occurrences/thu/date_058_0030.png",
+    "source_box": [
+      254,
+      2435,
+      336,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      34,
+      80,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_059",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/thu/date_059_0032.png",
+    "source_box": [
+      336,
+      2435,
+      419,
+      2638
+    ],
+    "size": [
+      83,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_060",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "6",
+    "file": "assets/occurrences/thu/date_060_0036.png",
+    "source_box": [
+      419,
+      2435,
+      509,
+      2638
+    ],
+    "size": [
+      90,
+      203
+    ],
+    "core_box_in_asset": [
+      4,
+      34,
+      83,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_061",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "년",
+    "file": "assets/occurrences/thu/date_061_b144.png",
+    "source_box": [
+      509,
+      2435,
+      670,
+      2638
+    ],
+    "size": [
+      161,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      131,
+      167
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_062",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/thu/date_062_0031.png",
+    "source_box": [
+      670,
+      2435,
+      768,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_063",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/thu/date_063_0031.png",
+    "source_box": [
+      768,
+      2435,
+      850,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      16,
+      34,
+      67,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_064",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "월",
+    "file": "assets/occurrences/thu/date_064_c6d4.png",
+    "source_box": [
+      850,
+      2435,
+      1029,
+      2638
+    ],
+    "size": [
+      179,
+      203
+    ],
+    "core_box_in_asset": [
+      15,
+      16,
+      152,
+      172
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_065",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/thu/date_065_0031.png",
+    "source_box": [
+      1029,
+      2435,
+      1123,
+      2638
+    ],
+    "size": [
+      94,
+      203
+    ],
+    "core_box_in_asset": [
+      28,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_066",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "9",
+    "file": "assets/occurrences/thu/date_066_0039.png",
+    "source_box": [
+      1123,
+      2435,
+      1221,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      14,
+      34,
+      93,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_067",
+    "sample_id": "thu",
+    "category": "date_glyph",
+    "text": "일",
+    "file": "assets/occurrences/thu/date_067_c77c.png",
+    "source_box": [
+      1221,
+      2435,
+      1386,
+      2638
+    ],
+    "size": [
+      165,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      135,
+      170
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_date_068",
+    "sample_id": "thu",
+    "category": "weekday_token",
+    "text": "(목)",
+    "file": "assets/occurrences/thu/date_068_0028_baa9_0029.png",
+    "source_box": [
+      1386,
+      2435,
+      1655,
+      2638
+    ],
+    "size": [
+      269,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      20,
+      264,
+      189
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_time_069",
+    "sample_id": "thu",
+    "category": "time_glyph",
+    "text": "오",
+    "file": "assets/occurrences/thu/time_069_c624.png",
+    "source_box": [
+      173,
+      2640,
+      321,
+      2830
+    ],
+    "size": [
+      148,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      25,
+      145,
+      151
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_time_070",
+    "sample_id": "thu",
+    "category": "time_glyph",
+    "text": "후",
+    "file": "assets/occurrences/thu/time_070_d6c4.png",
+    "source_box": [
+      320,
+      2640,
+      468,
+      2830
+    ],
+    "size": [
+      148,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      18,
+      144,
+      171
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_time_071",
+    "sample_id": "thu",
+    "category": "period_token",
+    "text": "오후",
+    "file": "assets/occurrences/thu/time_071_c624_d6c4.png",
+    "source_box": [
+      172,
+      2640,
+      491,
+      2830
+    ],
+    "size": [
+      319,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      18,
+      292,
+      171
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_time_072",
+    "sample_id": "thu",
+    "category": "time_glyph",
+    "text": "1",
+    "file": "assets/occurrences/thu/time_072_0031.png",
+    "source_box": [
+      491,
+      2640,
+      584,
+      2830
+    ],
+    "size": [
+      93,
+      190
+    ],
+    "core_box_in_asset": [
+      28,
+      33,
+      79,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_time_073",
+    "sample_id": "thu",
+    "category": "time_glyph",
+    "text": "2",
+    "file": "assets/occurrences/thu/time_073_0032.png",
+    "source_box": [
+      584,
+      2640,
+      680,
+      2830
+    ],
+    "size": [
+      96,
+      190
+    ],
+    "core_box_in_asset": [
+      15,
+      33,
+      91,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_time_074",
+    "sample_id": "thu",
+    "category": "time_glyph",
+    "text": ":",
+    "file": "assets/occurrences/thu/time_074_003a.png",
+    "source_box": [
+      680,
+      2640,
+      716,
+      2830
+    ],
+    "size": [
+      36,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      66,
+      29,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_time_075",
+    "sample_id": "thu",
+    "category": "time_glyph",
+    "text": "3",
+    "file": "assets/occurrences/thu/time_075_0033.png",
+    "source_box": [
+      716,
+      2640,
+      802,
+      2830
+    ],
+    "size": [
+      86,
+      190
+    ],
+    "core_box_in_asset": [
+      7,
+      33,
+      84,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "thu_time_076",
+    "sample_id": "thu",
+    "category": "time_glyph",
+    "text": "4",
+    "file": "assets/occurrences/thu/time_076_0034.png",
+    "source_box": [
+      802,
+      2640,
+      890,
+      2830
+    ],
+    "size": [
+      88,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      33,
+      83,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_077",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/fri/date_077_0032.png",
+    "source_box": [
+      170,
+      2435,
+      254,
+      2638
+    ],
+    "size": [
+      84,
+      203
+    ],
+    "core_box_in_asset": [
+      5,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_078",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "0",
+    "file": "assets/occurrences/fri/date_078_0030.png",
+    "source_box": [
+      254,
+      2435,
+      336,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      34,
+      80,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_079",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/fri/date_079_0032.png",
+    "source_box": [
+      336,
+      2435,
+      419,
+      2638
+    ],
+    "size": [
+      83,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_080",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "6",
+    "file": "assets/occurrences/fri/date_080_0036.png",
+    "source_box": [
+      419,
+      2435,
+      508,
+      2638
+    ],
+    "size": [
+      89,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      83,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_081",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "년",
+    "file": "assets/occurrences/fri/date_081_b144.png",
+    "source_box": [
+      508,
+      2435,
+      670,
+      2638
+    ],
+    "size": [
+      162,
+      203
+    ],
+    "core_box_in_asset": [
+      7,
+      16,
+      132,
+      167
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_082",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/fri/date_082_0031.png",
+    "source_box": [
+      670,
+      2435,
+      768,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_083",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/fri/date_083_0031.png",
+    "source_box": [
+      768,
+      2435,
+      850,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      16,
+      34,
+      67,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_084",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "월",
+    "file": "assets/occurrences/fri/date_084_c6d4.png",
+    "source_box": [
+      850,
+      2435,
+      1029,
+      2638
+    ],
+    "size": [
+      179,
+      203
+    ],
+    "core_box_in_asset": [
+      15,
+      16,
+      152,
+      172
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_085",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/fri/date_085_0031.png",
+    "source_box": [
+      1029,
+      2435,
+      1123,
+      2638
+    ],
+    "size": [
+      94,
+      203
+    ],
+    "core_box_in_asset": [
+      28,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_086",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "3",
+    "file": "assets/occurrences/fri/date_086_0033.png",
+    "source_box": [
+      1123,
+      2435,
+      1221,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      15,
+      34,
+      92,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_087",
+    "sample_id": "fri",
+    "category": "date_glyph",
+    "text": "일",
+    "file": "assets/occurrences/fri/date_087_c77c.png",
+    "source_box": [
+      1221,
+      2435,
+      1386,
+      2638
+    ],
+    "size": [
+      165,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      136,
+      170
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_date_088",
+    "sample_id": "fri",
+    "category": "weekday_token",
+    "text": "(금)",
+    "file": "assets/occurrences/fri/date_088_0028_ae08_0029.png",
+    "source_box": [
+      1386,
+      2435,
+      1655,
+      2638
+    ],
+    "size": [
+      269,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      22,
+      264,
+      189
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_time_089",
+    "sample_id": "fri",
+    "category": "time_glyph",
+    "text": "오",
+    "file": "assets/occurrences/fri/time_089_c624.png",
+    "source_box": [
+      174,
+      2640,
+      321,
+      2830
+    ],
+    "size": [
+      147,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      25,
+      144,
+      151
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_time_090",
+    "sample_id": "fri",
+    "category": "time_glyph",
+    "text": "후",
+    "file": "assets/occurrences/fri/time_090_d6c4.png",
+    "source_box": [
+      320,
+      2640,
+      468,
+      2830
+    ],
+    "size": [
+      148,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      18,
+      144,
+      171
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_time_091",
+    "sample_id": "fri",
+    "category": "period_token",
+    "text": "오후",
+    "file": "assets/occurrences/fri/time_091_c624_d6c4.png",
+    "source_box": [
+      173,
+      2640,
+      491,
+      2830
+    ],
+    "size": [
+      318,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      18,
+      291,
+      171
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_time_092",
+    "sample_id": "fri",
+    "category": "time_glyph",
+    "text": "1",
+    "file": "assets/occurrences/fri/time_092_0031.png",
+    "source_box": [
+      491,
+      2640,
+      586,
+      2830
+    ],
+    "size": [
+      95,
+      190
+    ],
+    "core_box_in_asset": [
+      28,
+      33,
+      79,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_time_093",
+    "sample_id": "fri",
+    "category": "time_glyph",
+    "text": "1",
+    "file": "assets/occurrences/fri/time_093_0031.png",
+    "source_box": [
+      586,
+      2640,
+      669,
+      2830
+    ],
+    "size": [
+      83,
+      190
+    ],
+    "core_box_in_asset": [
+      16,
+      33,
+      68,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_time_094",
+    "sample_id": "fri",
+    "category": "time_glyph",
+    "text": ":",
+    "file": "assets/occurrences/fri/time_094_003a.png",
+    "source_box": [
+      669,
+      2640,
+      715,
+      2830
+    ],
+    "size": [
+      46,
+      190
+    ],
+    "core_box_in_asset": [
+      16,
+      66,
+      40,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_time_095",
+    "sample_id": "fri",
+    "category": "time_glyph",
+    "text": "4",
+    "file": "assets/occurrences/fri/time_095_0034.png",
+    "source_box": [
+      715,
+      2640,
+      803,
+      2830
+    ],
+    "size": [
+      88,
+      190
+    ],
+    "core_box_in_asset": [
+      7,
+      33,
+      86,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "fri_time_096",
+    "sample_id": "fri",
+    "category": "time_glyph",
+    "text": "9",
+    "file": "assets/occurrences/fri/time_096_0039.png",
+    "source_box": [
+      803,
+      2640,
+      890,
+      2830
+    ],
+    "size": [
+      87,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      33,
+      82,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_097",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/sat/date_097_0032.png",
+    "source_box": [
+      170,
+      2435,
+      254,
+      2638
+    ],
+    "size": [
+      84,
+      203
+    ],
+    "core_box_in_asset": [
+      5,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_098",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "0",
+    "file": "assets/occurrences/sat/date_098_0030.png",
+    "source_box": [
+      254,
+      2435,
+      336,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      34,
+      80,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_099",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/sat/date_099_0032.png",
+    "source_box": [
+      336,
+      2435,
+      419,
+      2638
+    ],
+    "size": [
+      83,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_100",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "6",
+    "file": "assets/occurrences/sat/date_100_0036.png",
+    "source_box": [
+      419,
+      2435,
+      509,
+      2638
+    ],
+    "size": [
+      90,
+      203
+    ],
+    "core_box_in_asset": [
+      4,
+      34,
+      83,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_101",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "년",
+    "file": "assets/occurrences/sat/date_101_b144.png",
+    "source_box": [
+      509,
+      2435,
+      670,
+      2638
+    ],
+    "size": [
+      161,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      131,
+      167
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_102",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/sat/date_102_0031.png",
+    "source_box": [
+      670,
+      2435,
+      768,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_103",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/sat/date_103_0031.png",
+    "source_box": [
+      768,
+      2435,
+      850,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      16,
+      34,
+      67,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_104",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "월",
+    "file": "assets/occurrences/sat/date_104_c6d4.png",
+    "source_box": [
+      850,
+      2435,
+      1029,
+      2638
+    ],
+    "size": [
+      179,
+      203
+    ],
+    "core_box_in_asset": [
+      15,
+      16,
+      152,
+      172
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_105",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/sat/date_105_0031.png",
+    "source_box": [
+      1029,
+      2435,
+      1123,
+      2638
+    ],
+    "size": [
+      94,
+      203
+    ],
+    "core_box_in_asset": [
+      28,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_106",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "4",
+    "file": "assets/occurrences/sat/date_106_0034.png",
+    "source_box": [
+      1123,
+      2435,
+      1221,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      14,
+      34,
+      93,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_107",
+    "sample_id": "sat",
+    "category": "date_glyph",
+    "text": "일",
+    "file": "assets/occurrences/sat/date_107_c77c.png",
+    "source_box": [
+      1221,
+      2435,
+      1386,
+      2638
+    ],
+    "size": [
+      165,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      136,
+      170
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_date_108",
+    "sample_id": "sat",
+    "category": "weekday_token",
+    "text": "(토)",
+    "file": "assets/occurrences/sat/date_108_0028_d1a0_0029.png",
+    "source_box": [
+      1386,
+      2435,
+      1655,
+      2638
+    ],
+    "size": [
+      269,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      27,
+      264,
+      189
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_time_109",
+    "sample_id": "sat",
+    "category": "time_glyph",
+    "text": "오",
+    "file": "assets/occurrences/sat/time_109_c624.png",
+    "source_box": [
+      173,
+      2640,
+      321,
+      2830
+    ],
+    "size": [
+      148,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      25,
+      145,
+      151
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_time_110",
+    "sample_id": "sat",
+    "category": "time_glyph",
+    "text": "전",
+    "file": "assets/occurrences/sat/time_110_c804.png",
+    "source_box": [
+      321,
+      2640,
+      460,
+      2830
+    ],
+    "size": [
+      139,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      15,
+      135,
+      167
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_time_111",
+    "sample_id": "sat",
+    "category": "period_token",
+    "text": "오전",
+    "file": "assets/occurrences/sat/time_111_c624_c804.png",
+    "source_box": [
+      172,
+      2640,
+      487,
+      2830
+    ],
+    "size": [
+      315,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      15,
+      284,
+      167
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_time_112",
+    "sample_id": "sat",
+    "category": "time_glyph",
+    "text": "1",
+    "file": "assets/occurrences/sat/time_112_0031.png",
+    "source_box": [
+      487,
+      2640,
+      584,
+      2830
+    ],
+    "size": [
+      97,
+      190
+    ],
+    "core_box_in_asset": [
+      32,
+      33,
+      83,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_time_113",
+    "sample_id": "sat",
+    "category": "time_glyph",
+    "text": "2",
+    "file": "assets/occurrences/sat/time_113_0032.png",
+    "source_box": [
+      584,
+      2640,
+      680,
+      2830
+    ],
+    "size": [
+      96,
+      190
+    ],
+    "core_box_in_asset": [
+      15,
+      33,
+      91,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_time_114",
+    "sample_id": "sat",
+    "category": "time_glyph",
+    "text": ":",
+    "file": "assets/occurrences/sat/time_114_003a.png",
+    "source_box": [
+      680,
+      2640,
+      715,
+      2830
+    ],
+    "size": [
+      35,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      66,
+      29,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_time_115",
+    "sample_id": "sat",
+    "category": "time_glyph",
+    "text": "0",
+    "file": "assets/occurrences/sat/time_115_0030.png",
+    "source_box": [
+      715,
+      2640,
+      803,
+      2830
+    ],
+    "size": [
+      88,
+      190
+    ],
+    "core_box_in_asset": [
+      7,
+      33,
+      86,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sat_time_116",
+    "sample_id": "sat",
+    "category": "time_glyph",
+    "text": "8",
+    "file": "assets/occurrences/sat/time_116_0038.png",
+    "source_box": [
+      803,
+      2640,
+      890,
+      2830
+    ],
+    "size": [
+      87,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      33,
+      82,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_117",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/sun/date_117_0032.png",
+    "source_box": [
+      170,
+      2435,
+      254,
+      2638
+    ],
+    "size": [
+      84,
+      203
+    ],
+    "core_box_in_asset": [
+      5,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_118",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "0",
+    "file": "assets/occurrences/sun/date_118_0030.png",
+    "source_box": [
+      254,
+      2435,
+      336,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      34,
+      80,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_119",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/sun/date_119_0032.png",
+    "source_box": [
+      336,
+      2435,
+      419,
+      2638
+    ],
+    "size": [
+      83,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_120",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "6",
+    "file": "assets/occurrences/sun/date_120_0036.png",
+    "source_box": [
+      419,
+      2435,
+      509,
+      2638
+    ],
+    "size": [
+      90,
+      203
+    ],
+    "core_box_in_asset": [
+      4,
+      34,
+      83,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_121",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "년",
+    "file": "assets/occurrences/sun/date_121_b144.png",
+    "source_box": [
+      509,
+      2435,
+      670,
+      2638
+    ],
+    "size": [
+      161,
+      203
+    ],
+    "core_box_in_asset": [
+      7,
+      16,
+      131,
+      167
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_122",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/sun/date_122_0031.png",
+    "source_box": [
+      670,
+      2435,
+      768,
+      2638
+    ],
+    "size": [
+      98,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_123",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/sun/date_123_0031.png",
+    "source_box": [
+      768,
+      2435,
+      850,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      16,
+      34,
+      67,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_124",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "월",
+    "file": "assets/occurrences/sun/date_124_c6d4.png",
+    "source_box": [
+      850,
+      2435,
+      1029,
+      2638
+    ],
+    "size": [
+      179,
+      203
+    ],
+    "core_box_in_asset": [
+      15,
+      16,
+      152,
+      172
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_125",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "1",
+    "file": "assets/occurrences/sun/date_125_0031.png",
+    "source_box": [
+      1029,
+      2435,
+      1123,
+      2638
+    ],
+    "size": [
+      94,
+      203
+    ],
+    "core_box_in_asset": [
+      28,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_126",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "5",
+    "file": "assets/occurrences/sun/date_126_0035.png",
+    "source_box": [
+      1123,
+      2435,
+      1220,
+      2638
+    ],
+    "size": [
+      97,
+      203
+    ],
+    "core_box_in_asset": [
+      14,
+      36,
+      91,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_127",
+    "sample_id": "sun",
+    "category": "date_glyph",
+    "text": "일",
+    "file": "assets/occurrences/sun/date_127_c77c.png",
+    "source_box": [
+      1220,
+      2435,
+      1386,
+      2638
+    ],
+    "size": [
+      166,
+      203
+    ],
+    "core_box_in_asset": [
+      7,
+      16,
+      137,
+      170
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_date_128",
+    "sample_id": "sun",
+    "category": "weekday_token",
+    "text": "(일)",
+    "file": "assets/occurrences/sun/date_128_0028_c77c_0029.png",
+    "source_box": [
+      1386,
+      2435,
+      1655,
+      2638
+    ],
+    "size": [
+      269,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      16,
+      264,
+      189
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_time_129",
+    "sample_id": "sun",
+    "category": "time_glyph",
+    "text": "오",
+    "file": "assets/occurrences/sun/time_129_c624.png",
+    "source_box": [
+      174,
+      2640,
+      321,
+      2830
+    ],
+    "size": [
+      147,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      25,
+      144,
+      151
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_time_130",
+    "sample_id": "sun",
+    "category": "time_glyph",
+    "text": "후",
+    "file": "assets/occurrences/sun/time_130_d6c4.png",
+    "source_box": [
+      320,
+      2640,
+      468,
+      2830
+    ],
+    "size": [
+      148,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      18,
+      144,
+      171
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_time_131",
+    "sample_id": "sun",
+    "category": "period_token",
+    "text": "오후",
+    "file": "assets/occurrences/sun/time_131_c624_d6c4.png",
+    "source_box": [
+      173,
+      2640,
+      489,
+      2830
+    ],
+    "size": [
+      316,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      18,
+      291,
+      171
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_time_132",
+    "sample_id": "sun",
+    "category": "time_glyph",
+    "text": "7",
+    "file": "assets/occurrences/sun/time_132_0037.png",
+    "source_box": [
+      489,
+      2640,
+      599,
+      2830
+    ],
+    "size": [
+      110,
+      190
+    ],
+    "core_box_in_asset": [
+      26,
+      35,
+      104,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_time_133",
+    "sample_id": "sun",
+    "category": "time_glyph",
+    "text": ":",
+    "file": "assets/occurrences/sun/time_133_003a.png",
+    "source_box": [
+      599,
+      2640,
+      634,
+      2830
+    ],
+    "size": [
+      35,
+      190
+    ],
+    "core_box_in_asset": [
+      6,
+      66,
+      30,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_time_134",
+    "sample_id": "sun",
+    "category": "time_glyph",
+    "text": "0",
+    "file": "assets/occurrences/sun/time_134_0030.png",
+    "source_box": [
+      634,
+      2640,
+      719,
+      2830
+    ],
+    "size": [
+      85,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      33,
+      83,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "sun_time_135",
+    "sample_id": "sun",
+    "category": "time_glyph",
+    "text": "5",
+    "file": "assets/occurrences/sun/time_135_0035.png",
+    "source_box": [
+      719,
+      2640,
+      804,
+      2830
+    ],
+    "size": [
+      85,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      35,
+      80,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_136",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/single_digit_date/date_136_0032.png",
+    "source_box": [
+      170,
+      2435,
+      254,
+      2638
+    ],
+    "size": [
+      84,
+      203
+    ],
+    "core_box_in_asset": [
+      5,
+      34,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_137",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "0",
+    "file": "assets/occurrences/single_digit_date/date_137_0030.png",
+    "source_box": [
+      254,
+      2435,
+      336,
+      2638
+    ],
+    "size": [
+      82,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      34,
+      80,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_138",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "2",
+    "file": "assets/occurrences/single_digit_date/date_138_0032.png",
+    "source_box": [
+      336,
+      2435,
+      419,
+      2638
+    ],
+    "size": [
+      83,
+      203
+    ],
+    "core_box_in_asset": [
+      3,
+      34,
+      80,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_139",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "7",
+    "file": "assets/occurrences/single_digit_date/date_139_0037.png",
+    "source_box": [
+      419,
+      2435,
+      508,
+      2638
+    ],
+    "size": [
+      89,
+      203
+    ],
+    "core_box_in_asset": [
+      4,
+      36,
+      82,
+      158
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_140",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "년",
+    "file": "assets/occurrences/single_digit_date/date_140_b144.png",
+    "source_box": [
+      508,
+      2435,
+      668,
+      2638
+    ],
+    "size": [
+      160,
+      203
+    ],
+    "core_box_in_asset": [
+      7,
+      16,
+      132,
+      167
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_141",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "3",
+    "file": "assets/occurrences/single_digit_date/date_141_0033.png",
+    "source_box": [
+      668,
+      2435,
+      778,
+      2638
+    ],
+    "size": [
+      110,
+      203
+    ],
+    "core_box_in_asset": [
+      29,
+      34,
+      106,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_142",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "월",
+    "file": "assets/occurrences/single_digit_date/date_142_c6d4.png",
+    "source_box": [
+      778,
+      2435,
+      945,
+      2638
+    ],
+    "size": [
+      167,
+      203
+    ],
+    "core_box_in_asset": [
+      4,
+      16,
+      141,
+      172
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_143",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "3",
+    "file": "assets/occurrences/single_digit_date/date_143_0033.png",
+    "source_box": [
+      945,
+      2435,
+      1054,
+      2638
+    ],
+    "size": [
+      109,
+      203
+    ],
+    "core_box_in_asset": [
+      25,
+      34,
+      103,
+      160
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_144",
+    "sample_id": "single_digit_date",
+    "category": "date_glyph",
+    "text": "일",
+    "file": "assets/occurrences/single_digit_date/date_144_c77c.png",
+    "source_box": [
+      1054,
+      2435,
+      1219,
+      2638
+    ],
+    "size": [
+      165,
+      203
+    ],
+    "core_box_in_asset": [
+      6,
+      16,
+      135,
+      170
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_date_145",
+    "sample_id": "single_digit_date",
+    "category": "weekday_token",
+    "text": "(수)",
+    "file": "assets/occurrences/single_digit_date/date_145_0028_c218_0029.png",
+    "source_box": [
+      1219,
+      2435,
+      1491,
+      2638
+    ],
+    "size": [
+      272,
+      203
+    ],
+    "core_box_in_asset": [
+      30,
+      19,
+      267,
+      189
+    ],
+    "line": "date",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_time_146",
+    "sample_id": "single_digit_date",
+    "category": "time_glyph",
+    "text": "오",
+    "file": "assets/occurrences/single_digit_date/time_146_c624.png",
+    "source_box": [
+      174,
+      2640,
+      321,
+      2830
+    ],
+    "size": [
+      147,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      25,
+      144,
+      151
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_time_147",
+    "sample_id": "single_digit_date",
+    "category": "time_glyph",
+    "text": "전",
+    "file": "assets/occurrences/single_digit_date/time_147_c804.png",
+    "source_box": [
+      321,
+      2640,
+      460,
+      2830
+    ],
+    "size": [
+      139,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      15,
+      135,
+      167
+    ],
+    "line": "time",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_time_148",
+    "sample_id": "single_digit_date",
+    "category": "period_token",
+    "text": "오전",
+    "file": "assets/occurrences/single_digit_date/time_148_c624_c804.png",
+    "source_box": [
+      173,
+      2640,
+      485,
+      2830
+    ],
+    "size": [
+      312,
+      190
+    ],
+    "core_box_in_asset": [
+      4,
+      15,
+      283,
+      167
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_time_149",
+    "sample_id": "single_digit_date",
+    "category": "time_glyph",
+    "text": "9",
+    "file": "assets/occurrences/single_digit_date/time_149_0039.png",
+    "source_box": [
+      485,
+      2640,
+      599,
+      2830
+    ],
+    "size": [
+      114,
+      190
+    ],
+    "core_box_in_asset": [
+      30,
+      33,
+      109,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_time_150",
+    "sample_id": "single_digit_date",
+    "category": "time_glyph",
+    "text": ":",
+    "file": "assets/occurrences/single_digit_date/time_150_003a.png",
+    "source_box": [
+      599,
+      2640,
+      634,
+      2830
+    ],
+    "size": [
+      35,
+      190
+    ],
+    "core_box_in_asset": [
+      6,
+      66,
+      30,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_time_151",
+    "sample_id": "single_digit_date",
+    "category": "time_glyph",
+    "text": "0",
+    "file": "assets/occurrences/single_digit_date/time_151_0030.png",
+    "source_box": [
+      634,
+      2640,
+      720,
+      2830
+    ],
+    "size": [
+      86,
+      190
+    ],
+    "core_box_in_asset": [
+      5,
+      33,
+      83,
+      159
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "single_digit_date_time_152",
+    "sample_id": "single_digit_date",
+    "category": "time_glyph",
+    "text": "7",
+    "file": "assets/occurrences/single_digit_date/time_152_0037.png",
+    "source_box": [
+      720,
+      2640,
+      805,
+      2830
+    ],
+    "size": [
+      85,
+      190
+    ],
+    "core_box_in_asset": [
+      3,
+      35,
+      80,
+      157
+    ],
+    "line": "time",
+    "is_partition": true,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_153",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": "(",
+    "file": "assets/occurrences/mon/date_153_0028.png",
+    "source_box": [
+      1331,
+      2435,
+      1378,
+      2638
+    ],
+    "size": [
+      47,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      33,
+      45,
+      189
+    ],
+    "line": "date",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  },
+  {
+    "id": "mon_date_154",
+    "sample_id": "mon",
+    "category": "date_glyph",
+    "text": ")",
+    "file": "assets/occurrences/mon/date_154_0029.png",
+    "source_box": [
+      1524,
+      2435,
+      1572,
+      2638
+    ],
+    "size": [
+      48,
+      203
+    ],
+    "core_box_in_asset": [
+      2,
+      33,
+      46,
+      189
+    ],
+    "line": "date",
+    "is_partition": false,
+    "advance_px": null,
+    "baseline_px": null,
+    "metrics_status": "Source placement is measured; typographic advance/baseline are not inferred."
+  }
+]

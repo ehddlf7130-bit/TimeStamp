@@ -1,0 +1,6 @@
+{
+  "referenceSize": 3240,
+  "textShadow": { "sigmaPixels": 35.25, "opacity": 0.3787 },
+  "logoShadow": { "sigmaPixels": 45.0, "opacity": 0.2983 },
+  "calibration": "Estimated from the paired 1080px original and 3024px program JPEG supplied by the user. Symmetric black Gaussian halo, separate text and logo parameters. JPEG/resampling and font-edge differences remain."
+}

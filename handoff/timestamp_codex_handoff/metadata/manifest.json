@@ -1,0 +1,1686 @@
+{
+  "schema_version": 1,
+  "reference_canvas": {
+    "width": 3240,
+    "height": 3240,
+    "aspect_ratio": "1:1"
+  },
+  "coordinate_convention": "Pixels, top-left origin, [left, top, right, bottom), exclusive right/bottom",
+  "alpha_model": {
+    "status": "estimated_from_black_background",
+    "foreground_rgb": [
+      255,
+      255,
+      255
+    ],
+    "coverage": "JPEG grayscale value / 255; <=3 removed; retain only within 5px of values >12",
+    "limitations": [
+      "Original RGB and alpha cannot be separately identified from a black sample.",
+      "Black shadow is unobservable on black.",
+      "JPEG ringing, noise and subpixel glyph variants remain."
+    ]
+  },
+  "layout_observed": {
+    "date_region": [
+      150,
+      2435,
+      1700,
+      2638
+    ],
+    "time_region": [
+      150,
+      2640,
+      1000,
+      2830
+    ],
+    "date_core_top_y": 2451,
+    "date_first_core_x": 175,
+    "same_origin_for_all_samples": true,
+    "notes": "These are observed ink positions, not UIKit text-frame origin, font size, baseline, advance or kerning."
+  },
+  "canonical": {
+    "date_glyph:(": {
+      "text": "(",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0028.png",
+      "size": [
+        47,
+        162
+      ],
+      "source_occurrence_id": "mon_date_153",
+      "source_sample_id": "mon",
+      "source_box": [
+        1331,
+        2465,
+        1378,
+        2627
+      ],
+      "trim_in_occurrence": [
+        0,
+        30,
+        47,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "date_glyph:)": {
+      "text": ")",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0029.png",
+      "size": [
+        48,
+        162
+      ],
+      "source_occurrence_id": "mon_date_154",
+      "source_sample_id": "mon",
+      "source_box": [
+        1524,
+        2465,
+        1572,
+        2627
+      ],
+      "trim_in_occurrence": [
+        0,
+        30,
+        48,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "date_glyph:0": {
+      "text": "0",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0030.png",
+      "size": [
+        82,
+        133
+      ],
+      "source_occurrence_id": "mon_date_001",
+      "source_sample_id": "mon",
+      "source_box": [
+        254,
+        2465,
+        336,
+        2598
+      ],
+      "trim_in_occurrence": [
+        0,
+        30,
+        82,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 8
+    },
+    "date_glyph:1": {
+      "text": "1",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0031.png",
+      "size": [
+        58,
+        130
+      ],
+      "source_occurrence_id": "mon_date_005",
+      "source_sample_id": "mon",
+      "source_box": [
+        697,
+        2465,
+        755,
+        2595
+      ],
+      "trim_in_occurrence": [
+        27,
+        30,
+        85,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 20
+    },
+    "date_glyph:2": {
+      "text": "2",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0032.png",
+      "size": [
+        82,
+        130
+      ],
+      "source_occurrence_id": "mon_date_000",
+      "source_sample_id": "mon",
+      "source_box": [
+        172,
+        2465,
+        254,
+        2595
+      ],
+      "trim_in_occurrence": [
+        2,
+        30,
+        84,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 16
+    },
+    "date_glyph:3": {
+      "text": "3",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0033.png",
+      "size": [
+        84,
+        133
+      ],
+      "source_occurrence_id": "single_digit_date_date_141",
+      "source_sample_id": "single_digit_date",
+      "source_box": [
+        694,
+        2465,
+        778,
+        2598
+      ],
+      "trim_in_occurrence": [
+        26,
+        30,
+        110,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 3
+    },
+    "date_glyph:4": {
+      "text": "4",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0034.png",
+      "size": [
+        87,
+        130
+      ],
+      "source_occurrence_id": "sat_date_106",
+      "source_sample_id": "sat",
+      "source_box": [
+        1132,
+        2465,
+        1219,
+        2595
+      ],
+      "trim_in_occurrence": [
+        9,
+        30,
+        96,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "date_glyph:5": {
+      "text": "5",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0035.png",
+      "size": [
+        84,
+        130
+      ],
+      "source_occurrence_id": "sun_date_126",
+      "source_sample_id": "sun",
+      "source_box": [
+        1134,
+        2468,
+        1218,
+        2598
+      ],
+      "trim_in_occurrence": [
+        11,
+        33,
+        95,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "date_glyph:6": {
+      "text": "6",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0036.png",
+      "size": [
+        85,
+        133
+      ],
+      "source_occurrence_id": "mon_date_003",
+      "source_sample_id": "mon",
+      "source_box": [
+        419,
+        2465,
+        504,
+        2598
+      ],
+      "trim_in_occurrence": [
+        0,
+        30,
+        85,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 7
+    },
+    "date_glyph:7": {
+      "text": "7",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0037.png",
+      "size": [
+        85,
+        127
+      ],
+      "source_occurrence_id": "tue_date_027",
+      "source_sample_id": "tue",
+      "source_box": [
+        1134,
+        2468,
+        1219,
+        2595
+      ],
+      "trim_in_occurrence": [
+        11,
+        33,
+        96,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 2
+    },
+    "date_glyph:8": {
+      "text": "8",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0038.png",
+      "size": [
+        86,
+        133
+      ],
+      "source_occurrence_id": "wed_date_046",
+      "source_sample_id": "wed",
+      "source_box": [
+        1133,
+        2465,
+        1219,
+        2598
+      ],
+      "trim_in_occurrence": [
+        10,
+        30,
+        96,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "date_glyph:9": {
+      "text": "9",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/0039.png",
+      "size": [
+        86,
+        133
+      ],
+      "source_occurrence_id": "mon_date_008",
+      "source_sample_id": "mon",
+      "source_box": [
+        1049,
+        2465,
+        1135,
+        2598
+      ],
+      "trim_in_occurrence": [
+        22,
+        30,
+        108,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 2
+    },
+    "date_glyph:년": {
+      "text": "년",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/b144.png",
+      "size": [
+        132,
+        159
+      ],
+      "source_occurrence_id": "wed_date_041",
+      "source_sample_id": "wed",
+      "source_box": [
+        512,
+        2448,
+        644,
+        2607
+      ],
+      "trim_in_occurrence": [
+        4,
+        13,
+        136,
+        172
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 8
+    },
+    "date_glyph:월": {
+      "text": "월",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/c6d4.png",
+      "size": [
+        145,
+        162
+      ],
+      "source_occurrence_id": "tue_date_025",
+      "source_sample_id": "tue",
+      "source_box": [
+        861,
+        2448,
+        1006,
+        2610
+      ],
+      "trim_in_occurrence": [
+        11,
+        13,
+        156,
+        175
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 8
+    },
+    "date_glyph:일": {
+      "text": "일",
+      "category": "date_glyph",
+      "file": "assets/canonical/date_glyph/c77c.png",
+      "size": [
+        136,
+        162
+      ],
+      "source_occurrence_id": "mon_date_009",
+      "source_sample_id": "mon",
+      "source_box": [
+        1140,
+        2448,
+        1276,
+        2610
+      ],
+      "trim_in_occurrence": [
+        3,
+        13,
+        139,
+        175
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 8
+    },
+    "period_token:오전": {
+      "text": "오전",
+      "category": "period_token",
+      "file": "assets/canonical/period_token/c624_c804.png",
+      "size": [
+        287,
+        159
+      ],
+      "source_occurrence_id": "wed_time_051",
+      "source_sample_id": "wed",
+      "source_box": [
+        173,
+        2652,
+        460,
+        2811
+      ],
+      "trim_in_occurrence": [
+        1,
+        12,
+        288,
+        171
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 4
+    },
+    "period_token:오후": {
+      "text": "오후",
+      "category": "period_token",
+      "file": "assets/canonical/period_token/c624_d6c4.png",
+      "size": [
+        296,
+        159
+      ],
+      "source_occurrence_id": "thu_time_071",
+      "source_sample_id": "thu",
+      "source_box": [
+        173,
+        2655,
+        469,
+        2814
+      ],
+      "trim_in_occurrence": [
+        1,
+        15,
+        297,
+        174
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 4
+    },
+    "time_glyph:0": {
+      "text": "0",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0030.png",
+      "size": [
+        84,
+        134
+      ],
+      "source_occurrence_id": "wed_time_053",
+      "source_sample_id": "wed",
+      "source_box": [
+        596,
+        2669,
+        680,
+        2803
+      ],
+      "trim_in_occurrence": [
+        12,
+        29,
+        96,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 4
+    },
+    "time_glyph:1": {
+      "text": "1",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0031.png",
+      "size": [
+        58,
+        131
+      ],
+      "source_occurrence_id": "wed_time_052",
+      "source_sample_id": "wed",
+      "source_box": [
+        515,
+        2669,
+        573,
+        2800
+      ],
+      "trim_in_occurrence": [
+        28,
+        29,
+        86,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 5
+    },
+    "time_glyph:2": {
+      "text": "2",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0032.png",
+      "size": [
+        84,
+        131
+      ],
+      "source_occurrence_id": "thu_time_073",
+      "source_sample_id": "thu",
+      "source_box": [
+        596,
+        2669,
+        680,
+        2800
+      ],
+      "trim_in_occurrence": [
+        12,
+        29,
+        96,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 3
+    },
+    "time_glyph:3": {
+      "text": "3",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0033.png",
+      "size": [
+        85,
+        134
+      ],
+      "source_occurrence_id": "tue_time_033",
+      "source_sample_id": "tue",
+      "source_box": [
+        512,
+        2669,
+        597,
+        2803
+      ],
+      "trim_in_occurrence": [
+        27,
+        29,
+        112,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 2
+    },
+    "time_glyph:4": {
+      "text": "4",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0034.png",
+      "size": [
+        85,
+        131
+      ],
+      "source_occurrence_id": "thu_time_076",
+      "source_sample_id": "thu",
+      "source_box": [
+        802,
+        2669,
+        887,
+        2800
+      ],
+      "trim_in_occurrence": [
+        0,
+        29,
+        85,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 3
+    },
+    "time_glyph:5": {
+      "text": "5",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0035.png",
+      "size": [
+        83,
+        131
+      ],
+      "source_occurrence_id": "tue_time_036",
+      "source_sample_id": "tue",
+      "source_box": [
+        720,
+        2672,
+        803,
+        2803
+      ],
+      "trim_in_occurrence": [
+        2,
+        32,
+        85,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 3
+    },
+    "time_glyph:6": {
+      "text": "6",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0036.png",
+      "size": [
+        85,
+        133
+      ],
+      "source_occurrence_id": "wed_time_056",
+      "source_sample_id": "wed",
+      "source_box": [
+        802,
+        2670,
+        887,
+        2803
+      ],
+      "trim_in_occurrence": [
+        0,
+        30,
+        85,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "time_glyph:7": {
+      "text": "7",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0037.png",
+      "size": [
+        85,
+        128
+      ],
+      "source_occurrence_id": "sun_time_132",
+      "source_sample_id": "sun",
+      "source_box": [
+        512,
+        2672,
+        597,
+        2800
+      ],
+      "trim_in_occurrence": [
+        23,
+        32,
+        108,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 3
+    },
+    "time_glyph:8": {
+      "text": "8",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0038.png",
+      "size": [
+        86,
+        133
+      ],
+      "source_occurrence_id": "mon_time_014",
+      "source_sample_id": "mon",
+      "source_box": [
+        511,
+        2670,
+        597,
+        2803
+      ],
+      "trim_in_occurrence": [
+        22,
+        30,
+        108,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 2
+    },
+    "time_glyph:9": {
+      "text": "9",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/0039.png",
+      "size": [
+        87,
+        133
+      ],
+      "source_occurrence_id": "single_digit_date_time_149",
+      "source_sample_id": "single_digit_date",
+      "source_box": [
+        510,
+        2670,
+        597,
+        2803
+      ],
+      "trim_in_occurrence": [
+        25,
+        30,
+        112,
+        163
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 2
+    },
+    "time_glyph::": {
+      "text": ":",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/003a.png",
+      "size": [
+        32,
+        99
+      ],
+      "source_occurrence_id": "fri_time_094",
+      "source_sample_id": "fri",
+      "source_box": [
+        682,
+        2701,
+        714,
+        2800
+      ],
+      "trim_in_occurrence": [
+        13,
+        61,
+        45,
+        160
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 8
+    },
+    "time_glyph:오": {
+      "text": "오",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/c624.png",
+      "size": [
+        148,
+        135
+      ],
+      "source_occurrence_id": "mon_time_011",
+      "source_sample_id": "mon",
+      "source_box": [
+        173,
+        2661,
+        321,
+        2796
+      ],
+      "trim_in_occurrence": [
+        0,
+        21,
+        148,
+        156
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 8
+    },
+    "time_glyph:전": {
+      "text": "전",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/c804.png",
+      "size": [
+        139,
+        159
+      ],
+      "source_occurrence_id": "tue_time_031",
+      "source_sample_id": "tue",
+      "source_box": [
+        321,
+        2652,
+        460,
+        2811
+      ],
+      "trim_in_occurrence": [
+        0,
+        12,
+        139,
+        171
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 4
+    },
+    "time_glyph:후": {
+      "text": "후",
+      "category": "time_glyph",
+      "file": "assets/canonical/time_glyph/d6c4.png",
+      "size": [
+        148,
+        159
+      ],
+      "source_occurrence_id": "mon_time_012",
+      "source_sample_id": "mon",
+      "source_box": [
+        320,
+        2655,
+        468,
+        2814
+      ],
+      "trim_in_occurrence": [
+        0,
+        15,
+        148,
+        174
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 4
+    },
+    "weekday_token:(금)": {
+      "text": "(금)",
+      "category": "weekday_token",
+      "file": "assets/canonical/weekday_token/0028_ae08_0029.png",
+      "size": [
+        240,
+        174
+      ],
+      "source_occurrence_id": "fri_date_088",
+      "source_sample_id": "fri",
+      "source_box": [
+        1414,
+        2453,
+        1654,
+        2627
+      ],
+      "trim_in_occurrence": [
+        28,
+        18,
+        268,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "weekday_token:(목)": {
+      "text": "(목)",
+      "category": "weekday_token",
+      "file": "assets/canonical/weekday_token/0028_baa9_0029.png",
+      "size": [
+        239,
+        176
+      ],
+      "source_occurrence_id": "thu_date_068",
+      "source_sample_id": "thu",
+      "source_box": [
+        1414,
+        2451,
+        1653,
+        2627
+      ],
+      "trim_in_occurrence": [
+        28,
+        16,
+        267,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "weekday_token:(수)": {
+      "text": "(수)",
+      "category": "weekday_token",
+      "file": "assets/canonical/weekday_token/0028_c218_0029.png",
+      "size": [
+        242,
+        176
+      ],
+      "source_occurrence_id": "single_digit_date_date_145",
+      "source_sample_id": "single_digit_date",
+      "source_box": [
+        1247,
+        2451,
+        1489,
+        2627
+      ],
+      "trim_in_occurrence": [
+        28,
+        16,
+        270,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 2
+    },
+    "weekday_token:(월)": {
+      "text": "(월)",
+      "category": "weekday_token",
+      "file": "assets/canonical/weekday_token/0028_c6d4_0029.png",
+      "size": [
+        243,
+        179
+      ],
+      "source_occurrence_id": "mon_date_010",
+      "source_sample_id": "mon",
+      "source_box": [
+        1330,
+        2448,
+        1573,
+        2627
+      ],
+      "trim_in_occurrence": [
+        27,
+        13,
+        270,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "weekday_token:(일)": {
+      "text": "(일)",
+      "category": "weekday_token",
+      "file": "assets/canonical/weekday_token/0028_c77c_0029.png",
+      "size": [
+        239,
+        179
+      ],
+      "source_occurrence_id": "sun_date_128",
+      "source_sample_id": "sun",
+      "source_box": [
+        1414,
+        2448,
+        1653,
+        2627
+      ],
+      "trim_in_occurrence": [
+        28,
+        13,
+        267,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "weekday_token:(토)": {
+      "text": "(토)",
+      "category": "weekday_token",
+      "file": "assets/canonical/weekday_token/0028_d1a0_0029.png",
+      "size": [
+        240,
+        168
+      ],
+      "source_occurrence_id": "sat_date_108",
+      "source_sample_id": "sat",
+      "source_box": [
+        1414,
+        2459,
+        1654,
+        2627
+      ],
+      "trim_in_occurrence": [
+        28,
+        24,
+        268,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    },
+    "weekday_token:(화)": {
+      "text": "(화)",
+      "category": "weekday_token",
+      "file": "assets/canonical/weekday_token/0028_d654_0029.png",
+      "size": [
+        239,
+        179
+      ],
+      "source_occurrence_id": "tue_date_029",
+      "source_sample_id": "tue",
+      "source_box": [
+        1414,
+        2448,
+        1653,
+        2627
+      ],
+      "trim_in_occurrence": [
+        28,
+        13,
+        267,
+        192
+      ],
+      "advance_px": null,
+      "baseline_px": null,
+      "variant_count": 1
+    }
+  },
+  "samples": [
+    {
+      "id": "mon",
+      "original_filename": "IMG_4687.jpeg",
+      "datetime_local": "2026-11-09T20:47:00",
+      "timezone": "Asia/Seoul",
+      "date_text": "2026년 11월 9일 (월)",
+      "time_text": "오후 8:47",
+      "size": [
+        3240,
+        3240
+      ],
+      "sha256": "0c3060006544e0b032fcae4f78b79618ca651d6e2f6bc5525fef73ea4a4f09e0",
+      "source_file": "sources/calibration/mon.jpeg",
+      "occurrence_ids": [
+        "mon_date_000",
+        "mon_date_001",
+        "mon_date_002",
+        "mon_date_003",
+        "mon_date_004",
+        "mon_date_005",
+        "mon_date_006",
+        "mon_date_007",
+        "mon_date_008",
+        "mon_date_009",
+        "mon_date_010",
+        "mon_time_013",
+        "mon_time_014",
+        "mon_time_015",
+        "mon_time_016",
+        "mon_time_017"
+      ],
+      "date_core_box": [
+        175,
+        2451,
+        1570,
+        2624
+      ],
+      "date_specimen": {
+        "file": "assets/line_specimens/mon_date.png",
+        "source_box": [
+          170,
+          2435,
+          1575,
+          2638
+        ]
+      },
+      "time_core_box": [
+        177,
+        2658,
+        800,
+        2811
+      ],
+      "time_specimen": {
+        "file": "assets/line_specimens/mon_time.png",
+        "source_box": [
+          172,
+          2640,
+          805,
+          2830
+        ]
+      },
+      "logo_specimen": {
+        "file": "assets/logo_specimens/mon.png",
+        "source_box": [
+          2350,
+          200,
+          3060,
+          405
+        ]
+      },
+      "reference_overlay": "assets/reference_overlays/mon.png",
+      "validation": {
+        "partition_vs_full_max_abs_alpha": 0,
+        "source_core_max_abs_luminance": 0,
+        "source_core_mean_abs_luminance": 0.0,
+        "full_frame_mean_abs_luminance": 0.3944591144642585,
+        "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+      }
+    },
+    {
+      "id": "tue",
+      "original_filename": "IMG_4696(1).jpeg",
+      "datetime_local": "2026-11-17T03:55:00",
+      "timezone": "Asia/Seoul",
+      "date_text": "2026년 11월 17일 (화)",
+      "time_text": "오전 3:55",
+      "size": [
+        3240,
+        3240
+      ],
+      "sha256": "118779617bf0e72f556abfc338bef48300ea4283801580f757b3274a9dc2ac95",
+      "source_file": "sources/calibration/tue.jpeg",
+      "occurrence_ids": [
+        "tue_date_018",
+        "tue_date_019",
+        "tue_date_020",
+        "tue_date_021",
+        "tue_date_022",
+        "tue_date_023",
+        "tue_date_024",
+        "tue_date_025",
+        "tue_date_026",
+        "tue_date_027",
+        "tue_date_028",
+        "tue_date_029",
+        "tue_time_032",
+        "tue_time_033",
+        "tue_time_034",
+        "tue_time_035",
+        "tue_time_036"
+      ],
+      "date_core_box": [
+        175,
+        2451,
+        1650,
+        2624
+      ],
+      "date_specimen": {
+        "file": "assets/line_specimens/tue_date.png",
+        "source_box": [
+          170,
+          2435,
+          1655,
+          2638
+        ]
+      },
+      "time_core_box": [
+        177,
+        2655,
+        799,
+        2807
+      ],
+      "time_specimen": {
+        "file": "assets/line_specimens/tue_time.png",
+        "source_box": [
+          173,
+          2640,
+          804,
+          2830
+        ]
+      },
+      "logo_specimen": {
+        "file": "assets/logo_specimens/tue.png",
+        "source_box": [
+          2350,
+          200,
+          3060,
+          405
+        ]
+      },
+      "reference_overlay": "assets/reference_overlays/tue.png",
+      "validation": {
+        "partition_vs_full_max_abs_alpha": 0,
+        "source_core_max_abs_luminance": 0,
+        "source_core_mean_abs_luminance": 0.0,
+        "full_frame_mean_abs_luminance": 0.42676726108824875,
+        "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+      }
+    },
+    {
+      "id": "wed",
+      "original_filename": "IMG_4697(1).jpeg",
+      "datetime_local": "2026-11-18T10:26:00",
+      "timezone": "Asia/Seoul",
+      "date_text": "2026년 11월 18일 (수)",
+      "time_text": "오전 10:26",
+      "size": [
+        3240,
+        3240
+      ],
+      "sha256": "9f29abc2c85360b4b261015424a65ccd7f8fabe90bb05f97d7803409d9c816f4",
+      "source_file": "sources/calibration/wed.jpeg",
+      "occurrence_ids": [
+        "wed_date_037",
+        "wed_date_038",
+        "wed_date_039",
+        "wed_date_040",
+        "wed_date_041",
+        "wed_date_042",
+        "wed_date_043",
+        "wed_date_044",
+        "wed_date_045",
+        "wed_date_046",
+        "wed_date_047",
+        "wed_date_048",
+        "wed_time_051",
+        "wed_time_052",
+        "wed_time_053",
+        "wed_time_054",
+        "wed_time_055",
+        "wed_time_056"
+      ],
+      "date_core_box": [
+        175,
+        2451,
+        1650,
+        2624
+      ],
+      "date_specimen": {
+        "file": "assets/line_specimens/wed_date.png",
+        "source_box": [
+          170,
+          2435,
+          1655,
+          2638
+        ]
+      },
+      "time_core_box": [
+        177,
+        2655,
+        885,
+        2807
+      ],
+      "time_specimen": {
+        "file": "assets/line_specimens/wed_time.png",
+        "source_box": [
+          172,
+          2640,
+          890,
+          2830
+        ]
+      },
+      "logo_specimen": {
+        "file": "assets/logo_specimens/wed.png",
+        "source_box": [
+          2350,
+          200,
+          3060,
+          405
+        ]
+      },
+      "reference_overlay": "assets/reference_overlays/wed.png",
+      "validation": {
+        "partition_vs_full_max_abs_alpha": 0,
+        "source_core_max_abs_luminance": 0,
+        "source_core_mean_abs_luminance": 0.0,
+        "full_frame_mean_abs_luminance": 0.3778823731138546,
+        "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+      }
+    },
+    {
+      "id": "thu",
+      "original_filename": "IMG_4698(1).jpeg",
+      "datetime_local": "2026-11-19T12:34:00",
+      "timezone": "Asia/Seoul",
+      "date_text": "2026년 11월 19일 (목)",
+      "time_text": "오후 12:34",
+      "size": [
+        3240,
+        3240
+      ],
+      "sha256": "31a2aea5f1d5902bb60d897ec693e0ee06d680cb30d36e355aac507b471103f2",
+      "source_file": "sources/calibration/thu.jpeg",
+      "occurrence_ids": [
+        "thu_date_057",
+        "thu_date_058",
+        "thu_date_059",
+        "thu_date_060",
+        "thu_date_061",
+        "thu_date_062",
+        "thu_date_063",
+        "thu_date_064",
+        "thu_date_065",
+        "thu_date_066",
+        "thu_date_067",
+        "thu_date_068",
+        "thu_time_071",
+        "thu_time_072",
+        "thu_time_073",
+        "thu_time_074",
+        "thu_time_075",
+        "thu_time_076"
+      ],
+      "date_core_box": [
+        175,
+        2451,
+        1650,
+        2624
+      ],
+      "date_specimen": {
+        "file": "assets/line_specimens/thu_date.png",
+        "source_box": [
+          170,
+          2435,
+          1655,
+          2638
+        ]
+      },
+      "time_core_box": [
+        177,
+        2658,
+        885,
+        2811
+      ],
+      "time_specimen": {
+        "file": "assets/line_specimens/thu_time.png",
+        "source_box": [
+          172,
+          2640,
+          890,
+          2830
+        ]
+      },
+      "logo_specimen": {
+        "file": "assets/logo_specimens/thu.png",
+        "source_box": [
+          2350,
+          200,
+          3060,
+          405
+        ]
+      },
+      "reference_overlay": "assets/reference_overlays/thu.png",
+      "validation": {
+        "partition_vs_full_max_abs_alpha": 0,
+        "source_core_max_abs_luminance": 0,
+        "source_core_mean_abs_luminance": 0.0,
+        "full_frame_mean_abs_luminance": 0.3673631115683585,
+        "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+      }
+    },
+    {
+      "id": "fri",
+      "original_filename": "IMG_4699(1).jpeg",
+      "datetime_local": "2026-11-13T23:49:00",
+      "timezone": "Asia/Seoul",
+      "date_text": "2026년 11월 13일 (금)",
+      "time_text": "오후 11:49",
+      "size": [
+        3240,
+        3240
+      ],
+      "sha256": "85883ca835b0111a77f95dfeba73bfb66b557d4f5423b96503159905a1544a7c",
+      "source_file": "sources/calibration/fri.jpeg",
+      "occurrence_ids": [
+        "fri_date_077",
+        "fri_date_078",
+        "fri_date_079",
+        "fri_date_080",
+        "fri_date_081",
+        "fri_date_082",
+        "fri_date_083",
+        "fri_date_084",
+        "fri_date_085",
+        "fri_date_086",
+        "fri_date_087",
+        "fri_date_088",
+        "fri_time_091",
+        "fri_time_092",
+        "fri_time_093",
+        "fri_time_094",
+        "fri_time_095",
+        "fri_time_096"
+      ],
+      "date_core_box": [
+        175,
+        2451,
+        1650,
+        2624
+      ],
+      "date_specimen": {
+        "file": "assets/line_specimens/fri_date.png",
+        "source_box": [
+          170,
+          2435,
+          1655,
+          2638
+        ]
+      },
+      "time_core_box": [
+        177,
+        2658,
+        885,
+        2811
+      ],
+      "time_specimen": {
+        "file": "assets/line_specimens/fri_time.png",
+        "source_box": [
+          173,
+          2640,
+          890,
+          2830
+        ]
+      },
+      "logo_specimen": {
+        "file": "assets/logo_specimens/fri.png",
+        "source_box": [
+          2350,
+          200,
+          3060,
+          405
+        ]
+      },
+      "reference_overlay": "assets/reference_overlays/fri.png",
+      "validation": {
+        "partition_vs_full_max_abs_alpha": 0,
+        "source_core_max_abs_luminance": 0,
+        "source_core_mean_abs_luminance": 0.0,
+        "full_frame_mean_abs_luminance": 0.4130030673677793,
+        "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+      }
+    },
+    {
+      "id": "sat",
+      "original_filename": "IMG_4700(1).jpeg",
+      "datetime_local": "2026-11-14T00:08:00",
+      "timezone": "Asia/Seoul",
+      "date_text": "2026년 11월 14일 (토)",
+      "time_text": "오전 12:08",
+      "size": [
+        3240,
+        3240
+      ],
+      "sha256": "504465d1442c7d2542d85a2b015558ad7cb3f50691f1c1b6d935e0e1e8073891",
+      "source_file": "sources/calibration/sat.jpeg",
+      "occurrence_ids": [
+        "sat_date_097",
+        "sat_date_098",
+        "sat_date_099",
+        "sat_date_100",
+        "sat_date_101",
+        "sat_date_102",
+        "sat_date_103",
+        "sat_date_104",
+        "sat_date_105",
+        "sat_date_106",
+        "sat_date_107",
+        "sat_date_108",
+        "sat_time_111",
+        "sat_time_112",
+        "sat_time_113",
+        "sat_time_114",
+        "sat_time_115",
+        "sat_time_116"
+      ],
+      "date_core_box": [
+        175,
+        2451,
+        1650,
+        2624
+      ],
+      "date_specimen": {
+        "file": "assets/line_specimens/sat_date.png",
+        "source_box": [
+          170,
+          2435,
+          1655,
+          2638
+        ]
+      },
+      "time_core_box": [
+        177,
+        2655,
+        885,
+        2807
+      ],
+      "time_specimen": {
+        "file": "assets/line_specimens/sat_time.png",
+        "source_box": [
+          172,
+          2640,
+          890,
+          2830
+        ]
+      },
+      "logo_specimen": {
+        "file": "assets/logo_specimens/sat.png",
+        "source_box": [
+          2350,
+          200,
+          3060,
+          405
+        ]
+      },
+      "reference_overlay": "assets/reference_overlays/sat.png",
+      "validation": {
+        "partition_vs_full_max_abs_alpha": 0,
+        "source_core_max_abs_luminance": 0,
+        "source_core_mean_abs_luminance": 0.0,
+        "full_frame_mean_abs_luminance": 0.40106462429507694,
+        "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+      }
+    },
+    {
+      "id": "sun",
+      "original_filename": "IMG_4701(1).jpeg",
+      "datetime_local": "2026-11-15T19:05:00",
+      "timezone": "Asia/Seoul",
+      "date_text": "2026년 11월 15일 (일)",
+      "time_text": "오후 7:05",
+      "size": [
+        3240,
+        3240
+      ],
+      "sha256": "ad54c9328f00372751af7196a89bf79d3c3de9b99951c814f5220dc1240b3ec1",
+      "source_file": "sources/calibration/sun.jpeg",
+      "occurrence_ids": [
+        "sun_date_117",
+        "sun_date_118",
+        "sun_date_119",
+        "sun_date_120",
+        "sun_date_121",
+        "sun_date_122",
+        "sun_date_123",
+        "sun_date_124",
+        "sun_date_125",
+        "sun_date_126",
+        "sun_date_127",
+        "sun_date_128",
+        "sun_time_131",
+        "sun_time_132",
+        "sun_time_133",
+        "sun_time_134",
+        "sun_time_135"
+      ],
+      "date_core_box": [
+        175,
+        2451,
+        1650,
+        2624
+      ],
+      "date_specimen": {
+        "file": "assets/line_specimens/sun_date.png",
+        "source_box": [
+          170,
+          2435,
+          1655,
+          2638
+        ]
+      },
+      "time_core_box": [
+        177,
+        2658,
+        799,
+        2811
+      ],
+      "time_specimen": {
+        "file": "assets/line_specimens/sun_time.png",
+        "source_box": [
+          173,
+          2640,
+          804,
+          2830
+        ]
+      },
+      "logo_specimen": {
+        "file": "assets/logo_specimens/sun.png",
+        "source_box": [
+          2350,
+          200,
+          3060,
+          405
+        ]
+      },
+      "reference_overlay": "assets/reference_overlays/sun.png",
+      "validation": {
+        "partition_vs_full_max_abs_alpha": 0,
+        "source_core_max_abs_luminance": 0,
+        "source_core_mean_abs_luminance": 0.0,
+        "full_frame_mean_abs_luminance": 0.3949035970126505,
+        "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+      }
+    },
+    {
+      "id": "single_digit_date",
+      "original_filename": "IMG_4695(1).jpeg",
+      "datetime_local": "2027-03-03T09:07:00",
+      "timezone": "Asia/Seoul",
+      "date_text": "2027년 3월 3일 (수)",
+      "time_text": "오전 9:07",
+      "size": [
+        3240,
+        3240
+      ],
+      "sha256": "dc2051abae011ab2bf2250b81c2c6deec3b12e841a20f1acd8a0b04014db24ef",
+      "source_file": "sources/calibration/single_digit_date.jpeg",
+      "occurrence_ids": [
+        "single_digit_date_date_136",
+        "single_digit_date_date_137",
+        "single_digit_date_date_138",
+        "single_digit_date_date_139",
+        "single_digit_date_date_140",
+        "single_digit_date_date_141",
+        "single_digit_date_date_142",
+        "single_digit_date_date_143",
+        "single_digit_date_date_144",
+        "single_digit_date_date_145",
+        "single_digit_date_time_148",
+        "single_digit_date_time_149",
+        "single_digit_date_time_150",
+        "single_digit_date_time_151",
+        "single_digit_date_time_152"
+      ],
+      "date_core_box": [
+        175,
+        2451,
+        1486,
+        2624
+      ],
+      "date_specimen": {
+        "file": "assets/line_specimens/single_digit_date_date.png",
+        "source_box": [
+          170,
+          2435,
+          1491,
+          2638
+        ]
+      },
+      "time_core_box": [
+        177,
+        2655,
+        800,
+        2807
+      ],
+      "time_specimen": {
+        "file": "assets/line_specimens/single_digit_date_time.png",
+        "source_box": [
+          173,
+          2640,
+          805,
+          2830
+        ]
+      },
+      "logo_specimen": {
+        "file": "assets/logo_specimens/single_digit_date.png",
+        "source_box": [
+          2350,
+          200,
+          3060,
+          405
+        ]
+      },
+      "reference_overlay": "assets/reference_overlays/single_digit_date.png",
+      "validation": {
+        "partition_vs_full_max_abs_alpha": 0,
+        "source_core_max_abs_luminance": 0,
+        "source_core_mean_abs_luminance": 0.0,
+        "full_frame_mean_abs_luminance": 0.6931979690595945,
+        "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+      }
+    }
+  ],
+  "logo": {
+    "file": "assets/logo.png",
+    "source_sample_id": "mon",
+    "source_box": [
+      2371,
+      217,
+      3041,
+      387
+    ],
+    "contains": "TIME STAMP lettering + clock/postmark icon",
+    "alpha_status": "estimated_white_coverage; original color/opacity not identified"
+  }
+}

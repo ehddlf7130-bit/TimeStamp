@@ -1,0 +1,71 @@
+{
+  "samples": [
+    {
+      "id": "mon",
+      "partition_vs_full_max_abs_alpha": 0,
+      "source_core_max_abs_luminance": 0,
+      "source_core_mean_abs_luminance": 0.0,
+      "full_frame_mean_abs_luminance": 0.3944591144642585,
+      "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+    },
+    {
+      "id": "tue",
+      "partition_vs_full_max_abs_alpha": 0,
+      "source_core_max_abs_luminance": 0,
+      "source_core_mean_abs_luminance": 0.0,
+      "full_frame_mean_abs_luminance": 0.42676726108824875,
+      "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+    },
+    {
+      "id": "wed",
+      "partition_vs_full_max_abs_alpha": 0,
+      "source_core_max_abs_luminance": 0,
+      "source_core_mean_abs_luminance": 0.0,
+      "full_frame_mean_abs_luminance": 0.3778823731138546,
+      "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+    },
+    {
+      "id": "thu",
+      "partition_vs_full_max_abs_alpha": 0,
+      "source_core_max_abs_luminance": 0,
+      "source_core_mean_abs_luminance": 0.0,
+      "full_frame_mean_abs_luminance": 0.3673631115683585,
+      "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+    },
+    {
+      "id": "fri",
+      "partition_vs_full_max_abs_alpha": 0,
+      "source_core_max_abs_luminance": 0,
+      "source_core_mean_abs_luminance": 0.0,
+      "full_frame_mean_abs_luminance": 0.4130030673677793,
+      "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+    },
+    {
+      "id": "sat",
+      "partition_vs_full_max_abs_alpha": 0,
+      "source_core_max_abs_luminance": 0,
+      "source_core_mean_abs_luminance": 0.0,
+      "full_frame_mean_abs_luminance": 0.40106462429507694,
+      "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+    },
+    {
+      "id": "sun",
+      "partition_vs_full_max_abs_alpha": 0,
+      "source_core_max_abs_luminance": 0,
+      "source_core_mean_abs_luminance": 0.0,
+      "full_frame_mean_abs_luminance": 0.3949035970126505,
+      "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+    },
+    {
+      "id": "single_digit_date",
+      "partition_vs_full_max_abs_alpha": 0,
+      "source_core_max_abs_luminance": 0,
+      "source_core_mean_abs_luminance": 0.0,
+      "full_frame_mean_abs_luminance": 0.6931979690595945,
+      "meaning": "Fixed reference reconstruction only; not validation of arbitrary dates or bright backgrounds."
+    }
+  ],
+  "dynamic_renderer_implemented": false,
+  "bright_background_verified": false,
+  "original_font_identified": false
+}

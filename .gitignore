@@ -1,0 +1,8 @@
+**/bin/
+**/obj/
+artifacts/
+release/
+render-check-error.txt
+release/
+render-check-error.txt
+.vs/
