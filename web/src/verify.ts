@@ -1,57 +1,74 @@
-// Browser checks for the current font-based renderer. No WPF fixtures are required.
-import { wall } from './core/patrol';
+// Compare against PNGs produced by the user's saved TimeStamp-v1.1 executable.
+import { wall, type Wall } from './core/patrol';
 import { centerCrop, makeCanvas, release, StampRenderer } from './stamp/renderer';
 
-interface Result { name: string; ok: boolean }
+interface Result { name: string; ok: boolean; stampMean?: number; fullMean?: number; max?: number }
 const results: Result[] = [];
 const check = (name: string, ok: boolean) => results.push({ name, ok });
 
-function run() {
-  const renderer = new StampRenderer();
-  const time = wall(2026, 11, 9, 20, 5);
+async function compare(renderer: StampRenderer, file: string, time: Wall, size: number, white = false) {
+  const source = makeCanvas(8, 8);
+  const sourceContext = source.getContext('2d')!;
+  sourceContext.fillStyle = white ? '#fff' : '#000'; sourceContext.fillRect(0, 0, 8, 8);
+  const actual = renderer.render(source, centerCrop(8, 8), time, size);
+  const referenceImage = new Image();
+  referenceImage.src = new URL('./tests/fixtures/v1.1/' + file, document.baseURI).href;
+  await referenceImage.decode();
+  if (referenceImage.naturalWidth !== size || referenceImage.naturalHeight !== size) throw new Error('Reference size mismatch: ' + file);
+  const reference = makeCanvas(size, size);
+  reference.getContext('2d')!.drawImage(referenceImage, 0, 0);
+  const a = actual.getContext('2d', { willReadFrequently: true })!.getImageData(0, 0, size, size).data;
+  const b = reference.getContext('2d', { willReadFrequently: true })!.getImageData(0, 0, size, size).data;
+  const background = white ? 255 : 0;
+  let sum = 0, stampSum = 0, stampPixels = 0, max = 0;
+  for (let i = 0; i < a.length; i += 4) {
+    const difference = Math.abs(a[i] - b[i]);
+    sum += difference; max = Math.max(max, difference);
+    if (Math.abs(a[i] - background) > 2 || Math.abs(b[i] - background) > 2) {
+      stampSum += difference; stampPixels++;
+    }
+  }
+  const stampMean = stampSum / stampPixels;
+  const tolerance = size === 3240 ? 0.1 : white ? 1 : size === 1080 ? 6 : 3;
+  results.push({ name: 'v1.1 pixel comparison: ' + file,
+    ok: Number.isFinite(stampMean) && stampMean < tolerance && (size !== 3240 || max <= 2),
+    stampMean, fullMean: sum / (size * size), max });
+  if (file === 'stamp-1080.png') {
+    (window as unknown as { __stampPreview: string }).__stampPreview = actual.toDataURL('image/png');
+  }
+  release(source); release(actual); release(reference);
+}
+
+async function run() {
+  const renderer = await StampRenderer.load();
   check('landscape crop is centered', JSON.stringify(centerCrop(1920, 1080)) === JSON.stringify({ sx: 420, sy: 0, s: 1080 }));
   check('portrait crop is centered', JSON.stringify(centerCrop(1080, 1920)) === JSON.stringify({ sx: 0, sy: 420, s: 1080 }));
-
-  for (const size of [640, 1080, 1536, 3240]) {
-    const overlay = makeCanvas(size, size);
-    renderer.renderOverlay(overlay, time);
-    const g = overlay.getContext('2d', { willReadFrequently: true })!;
-    const pixels = g.getImageData(0, 0, size, size).data;
-    let dateInk = 0, logoInk = 0, shadow = 0;
-    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
-      const i = (y * size + x) * 4;
-      if (pixels[i] > 200 && pixels[i + 3] > 200) {
-        if (y > size * 0.7 && x < size * 0.8) dateInk++;
-        if (y < size * 0.2 && x > size * 0.3) logoInk++;
-      }
-      if (pixels[i] === 0 && pixels[i + 3] > 0) shadow++;
-    }
-    check(`${size}px date and time are visible`, dateInk > size);
-    check(`${size}px label and clock are visible`, logoInk > size / 4);
-    check(`${size}px soft black shadow is present`, shadow > size);
-    check(`${size}px photo center stays transparent`, g.getImageData(size / 2, size / 2, 1, 1).data[3] === 0);
-    release(overlay);
+  for (const sample of renderer.data.samples) {
+    const [date, time] = sample.datetime.split('T');
+    const [y, mo, d] = date.split('-').map(Number);
+    const [hh, mm] = time.split(':').map(Number);
+    await compare(renderer, sample.id + '-dynamic.png', wall(y, mo, d, hh, mm), 3240);
   }
+  for (const size of [1080, 1536, 3240]) {
+    await compare(renderer, 'stamp-' + size + '.png', wall(2026, 11, 9, 0, 5), size);
+  }
+  await compare(renderer, 'white-background.png', wall(2027, 3, 3, 9, 7), 1080, true);
 
   const photo = makeCanvas(8, 8);
-  const pg = photo.getContext('2d')!;
-  pg.fillStyle = '#336699'; pg.fillRect(0, 0, 8, 8);
+  const pg = photo.getContext('2d')!; pg.fillStyle = '#336699'; pg.fillRect(0, 0, 8, 8);
+  const time = wall(2026, 11, 9, 23, 5);
   const out = renderer.render(photo, centerCrop(8, 8), time, 1080);
-  check('export preserves the photo away from the stamp',
-    [...out.getContext('2d')!.getImageData(540, 540, 1, 1).data].join() === '51,102,153,255');
+  check('export preserves the photo away from the stamp', [...out.getContext('2d')!.getImageData(540, 540, 1, 1).data].join() === '51,102,153,255');
   const overlay = makeCanvas(1080, 1080);
   renderer.renderOverlay(overlay, time);
-  const before = overlay.toDataURL();
-  renderer.label = '경비 순찰';
-  renderer.renderOverlay(overlay, time);
-  check('changing the label updates the stamp', overlay.toDataURL() !== before);
+  check('camera overlay leaves the photo center transparent', overlay.getContext('2d')!.getImageData(540, 540, 1, 1).data[3] === 0);
   release(photo); release(out); release(overlay);
 
   (window as unknown as { __results: Result[] }).__results = results;
-  document.getElementById('out')!.textContent = results.map((r) => `${r.ok ? 'PASS' : 'FAIL'} ${r.name}`).join('\n');
+  document.getElementById('out')!.textContent = results.map((r) => (r.ok ? 'PASS' : 'FAIL') + ' ' + r.name).join('\n');
 }
 
-try { run(); } catch (e) {
+run().catch((e) => {
   (window as unknown as { __error: string }).__error = String(e);
   document.getElementById('out')!.textContent = String(e);
-}
+});

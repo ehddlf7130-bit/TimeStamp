@@ -5,7 +5,6 @@ import { CalculatorPage } from './pages/calculator';
 import { PatrolPage } from './pages/patrol';
 import { defaultInputs, type PlanInputs } from './pages/planform';
 import { StampRenderer } from './stamp/renderer';
-import { initLabel } from './settings';
 
 type Tab = 'calc' | 'batch' | 'patrol';
 const TABS: { id: Tab; label: string; icon: string }[] = [
@@ -25,8 +24,7 @@ function remembered(): Tab {
 }
 
 async function main() {
-  const renderer = new StampRenderer();
-  initLabel(renderer);
+  const renderer = await StampRenderer.load();
   const inputs = defaultInputs();
   const main = h('main');
   const nav = h('nav', { class: 'tabs' });

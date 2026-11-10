@@ -1,7 +1,6 @@
 // 순찰 촬영: each shutter press stamps the selected planned time and advances immediately.
 import { exportFileName, exportName, nextPendingSlot, stampDate, stampTime, type PatrolPlan } from '../core/patrol';
 import { clear, errorMessage, h, toast } from '../dom';
-import { onLabelChange, labelField } from '../settings';
 import { clearPatrol, deleteShot, loadSession, loadShots, persist, saveCapture, saveSession, startPatrol, type PatrolSession, type Shot } from '../store/db';
 import { download, makeZip, shareFiles, type NamedBlob } from '../stamp/export';
 import { canvasToBlob, centerCrop, makeCanvas, release, type StampRenderer } from '../stamp/renderer';
@@ -54,7 +53,7 @@ export class PatrolPage {
       this.setupInfo,
       h('div', { class: 'card' }, this.form.el,
         h('button', { class: 'ghost block', onclick: goCalc }, '계산기에서 확인하기')),
-      h('div', { class: 'card' }, labelField(),
+      h('div', { class: 'card' },
         h('label', { class: 'field' }, h('span', null, '저장 해상도'), this.size),
         h('label', { class: 'check' }, this.autoShare, h('span', null, '찍을 때마다 바로 저장 (공유 시트 열기)')),
         this.startButton));
@@ -68,7 +67,6 @@ export class PatrolPage {
       viewport, this.camStrip,
       h('div', { class: 'cam-controls' }, this.lastThumb, this.shutter, h('span')));
     new ResizeObserver(() => this.sizeOverlay()).observe(viewport);
-    onLabelChange(() => { this.overlayKey = ''; if (this.view === 'camera') this.updateCamera(); });
     this.el = h('section', { class: 'page' }, this.setupEl, this.galleryEl);
     document.body.append(this.cameraEl);
     document.addEventListener('visibilitychange', () => {
@@ -253,7 +251,7 @@ export class PatrolPage {
     const taken = this.planned();
     this.camProgress.textContent = time ? `${this.slot + 1} / ${this.plan.count} · ${stampTime(time)}` : '촬영 완료';
     this.camStatus.textContent = `${taken.has(this.slot) ? '다시 찍기 · 저장된 사진을 교체합니다' : '계획 시각으로 촬영'} · ${taken.size} / ${this.plan.count}장 저장`;
-    const key = `${time?.getTime()}|${this.overlay.width}|${this.renderer.label}`;
+    const key = `${time?.getTime()}|${this.overlay.width}`;
     if (time && this.overlay.width && key !== this.overlayKey) {
       this.renderer.renderOverlay(this.overlay, time);
       this.overlayKey = key;

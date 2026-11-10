@@ -3,9 +3,9 @@ name: Web checks and GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ['web/**', '.github/workflows/pages.yml']
+    paths: ['web/**', 'handoff/timestamp_codex_handoff/**', 'src/TimeStamp.App/*.json', '.github/workflows/pages.yml']
   pull_request:
-    paths: ['web/**', '.github/workflows/pages.yml']
+    paths: ['web/**', 'handoff/timestamp_codex_handoff/**', 'src/TimeStamp.App/*.json', '.github/workflows/pages.yml']
   workflow_dispatch:
 
 permissions:

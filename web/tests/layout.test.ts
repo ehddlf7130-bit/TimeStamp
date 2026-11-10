@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { blurAlpha, boxWidths, cleanLabel, DEFAULT_LABEL, MAX_LABEL } from '../src/stamp/layout';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { blurAlpha, boxWidths, layoutStamp, shadowTile, type StampData } from '../src/stamp/layout';
+import { wall } from '../src/core/patrol';
+
+const root = new URL('../../handoff/timestamp_codex_handoff/', import.meta.url);
+const manifest = JSON.parse(readFileSync(new URL('metadata/manifest.json', root), 'utf8'));
+const occurrences = new Map<string, { source_box: number[]; core_box_in_asset: number[] }>(
+  JSON.parse(readFileSync(new URL('metadata/occurrences.json', root), 'utf8')).map((o: { id: string }) => [o.id, o]));
+const data: StampData = JSON.parse(readFileSync(new URL('../public/stamp/stamp-data.json', import.meta.url), 'utf8'));
 
 describe('stamp shadow', () => {
   it('uses the calibrated Gaussian box widths', () => {
@@ -40,9 +49,38 @@ describe('stamp shadow', () => {
   });
 });
 
-describe('stamp label', () => {
-  it('normalizes whitespace and trims the label', () => expect(cleanLabel('  야간\n  순찰  ')).toBe('야간 순찰'));
-  it('allows an empty label for a clock-only stamp', () => expect(cleanLabel('  ')).toBe(''));
-  it('limits a long label', () => expect(cleanLabel('가'.repeat(40))).toHaveLength(MAX_LABEL));
-  it('keeps the default label unchanged', () => expect(cleanLabel(DEFAULT_LABEL)).toBe(DEFAULT_LABEL));
+describe('original v1.1 glyph layout', () => {
+  for (const sample of manifest.samples) {
+    it(`matches measured glyph ink positions: ${sample.id}`, () => {
+      const [date, time] = sample.datetime_local.split('T');
+      const [y, mo, d] = date.split('-').map(Number);
+      const [hh, mm] = time.split(':').map(Number);
+      const placed = layoutStamp(data, wall(y, mo, d, hh, mm));
+      const ids: string[] = sample.occurrence_ids;
+      const observed = ids.map((id) => occurrences.get(id)!);
+      expect(placed).toHaveLength(observed.length);
+      placed.forEach((p, i) => {
+        const expectedCoreX = observed[i].source_box[0] + observed[i].core_box_in_asset[0];
+        expect(Math.abs(p.x + data.glyphs[p.key].coreLeft - expectedCoreX)).toBeLessThan(2);
+        expect(p.y).toBe(data.glyphs[p.key].y);
+      });
+    });
+  }
+
+  it('keeps v1.1 shadow tile padding and coordinates', () => {
+    expect(shadowTile([{ key: 'x', x: 10.5, y: 20, w: 100, h: 50 }], 35.25))
+      .toEqual({ left: -97, top: -87, width: 315, height: 264 });
+  });
+
+  it('keeps all 43 assets and settings identical to the saved TimeStamp-v1.1 release', () => {
+    const hashes = JSON.parse(readFileSync(new URL('./fixtures/v1.1/source-sha256.json', import.meta.url), 'utf8')) as Record<string, string>;
+    expect(Object.keys(hashes)).toHaveLength(43);
+    for (const [file, expectedHash] of Object.entries(hashes)) {
+      const source = file.startsWith('Resources/') ? new URL(file.slice('Resources/'.length), root)
+        : new URL('../../src/TimeStamp.App/' + file, import.meta.url);
+      const bytes = readFileSync(source);
+      const normalized = file.endsWith('.json') ? bytes.toString('utf8').replace(/\r\n/g, '\n') : bytes;
+      expect(createHash('sha256').update(normalized).digest('hex'), file).toBe(expectedHash);
+    }
+  });
 });

@@ -42,7 +42,11 @@ try {
   await diagnostics.waitForFunction(() => window.__results || window.__error);
   const error = await diagnostics.evaluate(() => window.__error);
   if (error) throw new Error(error);
-  for (const r of await diagnostics.evaluate(() => window.__results)) check(r.ok, r.name);
+  for (const r of await diagnostics.evaluate(() => window.__results)) {
+    check(r.ok, r.name + (r.stampMean === undefined ? '' : ` (stamp-area mean ${r.stampMean.toFixed(3)}/255; max ${r.max}/255)`));
+  }
+  const originalPreview = await diagnostics.evaluate(() => window.__stampPreview);
+  if (originalPreview) writeFileSync(join(out, 'v1.1-web-1080.png'), Buffer.from(originalPreview.split(',')[1], 'base64'));
   await diagnostics.close();
   await server.close(); server = undefined;
 
@@ -83,13 +87,7 @@ try {
   await visible().locator('input[type=date]').fill('2026-11-09');
   await visible().locator('input[type=time]').nth(0).fill('23:00');
   await visible().locator('input[type=time]').nth(1).fill('23:30');
-  const patrolLabel = visible().locator('input[type=text]');
-  await patrolLabel.fill('야간 순찰');
-  await patrolLabel.blur();
-  check(await page.evaluate(() => localStorage.getItem('stampLabel')) === '야간 순찰', 'editing the label persists it');
-  await tab('스탬프 찍기');
-  check(await visible().locator('input[type=text]').inputValue() === '야간 순찰', 'batch and camera label fields stay in sync');
-  await tab('순찰 촬영');
+  check(await visible().locator('input[type=text]').count() === 0, 'the original v1.1 logo is fixed without a replacement label field');
   await visible().getByRole('button', { name: '순찰 시작', exact: true }).click();
   await page.waitForFunction(() => document.querySelector('.camera video')?.videoWidth > 0);
   const capture = async () => {
@@ -114,10 +112,12 @@ try {
   const title = () => page.locator('.cam-title').innerText();
   check((await title()).includes('1 / 6') && (await title()).includes('오후 11:05'), '23:00–23:30 starts at planned 23:05 despite the clock being 20:05');
   await page.evaluate(() => {
-    window.__stampDrawTexts = [];
-    const draw = CanvasRenderingContext2D.prototype.fillText;
-    CanvasRenderingContext2D.prototype.fillText = function (...args) {
-      if (this.canvas.width === 1080) window.__stampDrawTexts.push(args[0]);
+    window.__stampGlyphFiles = [];
+    const draw = CanvasRenderingContext2D.prototype.drawImage;
+    CanvasRenderingContext2D.prototype.drawImage = function (...args) {
+      if (this.canvas.width === 1080 && args[0] instanceof HTMLImageElement) {
+        window.__stampGlyphFiles.push(args[0].src.split('/stamp/')[1]);
+      }
       return draw.apply(this, args);
     };
     // Fail the session write after the photo write has been queued: both must roll back.
@@ -135,7 +135,10 @@ try {
   check(failedCapture.shots.length === 0 && failedCapture.nextSlot === 0 && (await title()).includes('1 / 6'), 'a failed save rolls back the photo and does not advance the planned time');
   await capture();
   check((await title()).includes('2 / 6') && (await title()).includes('오후 11:10'), 'first saved photo advances immediately to 23:10');
-  check(await page.evaluate(() => window.__stampDrawTexts.includes('오후 11:05') && !window.__stampDrawTexts.includes('오후 8:05')), 'the exported photo canvas draws the planned time rather than the live clock');
+  check(await page.evaluate(() => window.__stampGlyphFiles.includes('assets/logo.png') && window.__stampGlyphFiles.slice(-6).join() === [
+    'assets/canonical/period_token/c624_d6c4.png', 'assets/canonical/time_glyph/0031.png', 'assets/canonical/time_glyph/0031.png',
+    'assets/canonical/time_glyph/003a.png', 'assets/canonical/time_glyph/0030.png', 'assets/canonical/time_glyph/0035.png',
+  ].join()), 'the exported canvas uses the original logo and glyph PNGs for planned 23:05');
   await capture();
   await capture();
   check(await page.locator('.cam-strip .cell.taken').count() === 3 && (await title()).includes('오후 11:20'), 'three immediate captures advance to 23:20 without waiting five minutes');
@@ -178,7 +181,6 @@ try {
   check(await visible().locator('.grid .tile').count() === 6, 'replacing the deleted time completes the plan again');
 
   await visible().getByRole('button', { name: '새 순찰 시작', exact: true }).click();
-  check(await visible().locator('input[type=text]').inputValue() === '야간 순찰', 'reload restores the saved label');
   await visible().locator('input[type=time]').nth(0).fill('23:50');
   await visible().locator('input[type=time]').nth(1).fill('00:10');
   await visible().getByRole('button', { name: '순찰 시작', exact: true }).click();

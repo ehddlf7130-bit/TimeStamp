@@ -1,7 +1,55 @@
-// DOM-free helpers: the three-box Gaussian approximation used for the stamp's soft shadow.
+// Geometry and shadow calculations ported from TimeStamp-v1.1.
+import { stampDate, stampTime, type Wall } from '../core/patrol';
+
+export interface Glyph { file: string; coreLeft: number; y: number; w: number; h: number }
+export interface Element { key: string; x: number; y: number; w: number; h: number }
+export interface ShadowStyle { sigmaPixels: number; opacity: number }
+export interface StampData {
+  referenceSize: number;
+  glyphs: Record<string, Glyph>;
+  logo: { file: string; x: number; y: number; w: number; h: number };
+  date: Record<string, number>;
+  time: Record<string, number>;
+  textShadow: ShadowStyle;
+  logoShadow: ShadowStyle;
+  samples: { id: string; datetime: string }[];
+}
+
+/** Place original glyph PNGs using v1.1's ink bearings, advances, and per-glyph Y. */
+export function layoutStamp(data: StampData, time: Wall): Element[] {
+  const line = (text: string, date: boolean): Element[] => {
+    const metrics = date ? data.date : data.time;
+    let cursor = date ? 170 : 172;
+    const placed: Element[] = [];
+    for (const token of text.match(/\([^)]*\)|오전|오후|\s|./gu) ?? []) {
+      if (token === ' ') { cursor += metrics['advance: ']; continue; }
+      const category = token.startsWith('(') ? 'weekday_token' : token.startsWith('오') ? 'period_token' : date ? 'date_glyph' : 'time_glyph';
+      const key = `${category}:${token}`;
+      const glyph = data.glyphs[key];
+      if (!glyph || !Number.isFinite(metrics['bearing:' + token])) throw new Error('스탬프 글자 자료가 없습니다: ' + key);
+      placed.push({ key, x: cursor + metrics['bearing:' + token] - glyph.coreLeft, y: glyph.y, w: glyph.w, h: glyph.h });
+      const group = /^[0-9]/.test(token) ? 'digit' : token.startsWith('오') ? 'period' : token;
+      cursor += metrics['advance:' + group] ?? 0;
+    }
+    return placed;
+  };
+  return [...line(stampDate(time), true), ...line(stampTime(time), false)];
+}
+
+/** Preserve the complete finite support of v1.1's three box-filter shadow. */
+export function shadowTile(elements: Element[], sigma: number) {
+  const padding = boxWidths(sigma).reduce((sum, width) => sum + (width - 1) / 2, 3);
+  const left = Math.floor(Math.min(...elements.map((e) => e.x))) - padding;
+  const top = Math.floor(Math.min(...elements.map((e) => e.y))) - padding;
+  return {
+    left, top,
+    width: Math.ceil(Math.max(...elements.map((e) => e.x + e.w))) - left + padding,
+    height: Math.ceil(Math.max(...elements.map((e) => e.y + e.h))) - top + padding,
+  };
+}
 
 /** .NET Math.Round default (banker's rounding), kept from the original shadow port. */
-function roundHalfEven(x: number): number {
+export function roundHalfEven(x: number): number {
   const r = Math.round(x);
   return Math.abs(x % 1) === 0.5 && r % 2 !== 0 ? r - 1 : r;
 }
@@ -50,11 +98,4 @@ function boxVertical(src: Float32Array, dst: Float32Array, width: number, height
       if (add < height) sum += src[add * width + x];
     }
   }
-}
-
-export const DEFAULT_LABEL = '순찰 기록';
-export const MAX_LABEL = 16;
-
-export function cleanLabel(text: string): string {
-  return text.replace(/\s+/g, ' ').trim().slice(0, MAX_LABEL);
 }

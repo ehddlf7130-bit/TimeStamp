@@ -4,7 +4,6 @@ import { clear, errorMessage, h, loadFileImage, toast } from '../dom';
 import { canShareFiles, download, makeZip, shareFiles, type NamedBlob } from '../stamp/export';
 import { canvasToBlob, centerCrop, makeCanvas, release, type StampRenderer } from '../stamp/renderer';
 import { PlanForm, planFrom, type PlanInputs } from './planform';
-import { labelField, onLabelChange } from '../settings';
 
 interface Photo { id: number; file: File; key: string; w: number; h: number; thumb: string }
 interface Slot { time: Wall; photo: Photo | null }
@@ -41,7 +40,6 @@ export class BatchPage {
 
   constructor(inputs: PlanInputs, private renderer: StampRenderer) {
     this.form = new PlanForm(inputs);
-    onLabelChange(() => { void this.drawPreview(); });
     this.fileInput.addEventListener('change', () => {
       const files = [...(this.fileInput.files ?? [])];
       this.fileInput.value = '';
@@ -67,7 +65,6 @@ export class BatchPage {
         this.slotList),
       h('div', { class: 'card' },
         h('h2', null, '내보내기'),
-        labelField(),
         h('div', { class: 'row2' },
           h('label', { class: 'field' }, h('span', null, '해상도'), this.size),
           h('label', { class: 'field' }, h('span', null, '형식'), this.format)),

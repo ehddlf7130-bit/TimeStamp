@@ -1,7 +1,7 @@
 // Builds public/stamp/ from the same sources the WPF app copies into Resources/.
 // Mirrors StampRenderer's constructor: glyph CoreLeft = core_box_in_asset[0] - trim_in_occurrence[0], Y = source_box[1].
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, rmSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const web = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -17,6 +17,7 @@ const metrics = read(join(app, 'layout-metrics.json'));
 const style = read(join(app, 'stamp-style.json'));
 if (style.referenceSize !== 3240) throw new Error('Stamp style must use the 3240px reference canvas.');
 
+if (!out.startsWith(web + sep) || relative(web, out) !== join('public', 'stamp')) throw new Error('Invalid generated stamp output path.');
 rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 
