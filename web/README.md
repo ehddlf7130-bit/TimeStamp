@@ -4,9 +4,9 @@
 
 ## 배포 주소
 
-[타임스탬프 웹 앱](https://timestamp-patrol.downyflora3.chatgpt.site)
+[타임스탬프 웹 앱 — GitHub Pages](https://ehddlf7130-bit.github.io/TimeStamp/)
 
-Sites에서 본인 계정 전용으로 제공하며 ChatGPT 로그인이 필요합니다. GitHub 소스 저장소도 비공개로 유지합니다. 현재 GitHub 요금제는 이 비공개 저장소의 Pages 배포를 지원하지 않아 Sites 정적 호스팅을 사용합니다. 사이트 식별자와 정적 파일 경로는 `.openai/hosting.json`에 기록합니다.
+공개 GitHub 저장소에서 GitHub Pages로 배포하며 로그인 없이 접속할 수 있습니다. 사진과 순찰 기록은 접속 주소별 브라우저 저장소에 보관되므로, 이전 Sites 주소에서 찍은 사진은 해당 주소에서 별도로 내보내야 합니다.
 
 ## 화면
 
@@ -47,7 +47,7 @@ npm run dev
 
 `main`에 push하거나 PR을 만들면 `.github/workflows/pages.yml`이 설치·테스트·빌드·브라우저 검증을 실행합니다. `dist`와 `node_modules`, 검증 결과는 소스로 업로드하지 않습니다.
 
-GitHub Pages 배포는 기본적으로 꺼져 있습니다. 저장소 요금제와 공개 범위에서 Pages를 지원하는지 확인한 뒤 다음을 설정하세요.
+현재 저장소에서는 GitHub Pages와 `ENABLE_PAGES=true`가 활성화되어 있어 `main`의 웹 변경 사항을 검증한 뒤 자동 배포합니다. 다른 저장소에서 사용할 때는 다음을 설정하세요.
 
 1. 저장소 Settings → Pages → Source를 **GitHub Actions**로 선택합니다.
 2. Settings → Secrets and variables → Actions → Variables에 `ENABLE_PAGES` 값을 `true`로 만듭니다.
