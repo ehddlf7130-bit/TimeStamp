@@ -67,6 +67,16 @@ export function createPlan(date: Wall, startText: string, endText: string): Patr
   return { start: from, end: to, slots, count: slots.length, minutes, outsideNormalHours: outside };
 }
 
+/** One exact wall-clock minute, without the range plan's five-minute offset. */
+export function createSinglePlan(date: Wall, timeText: string): PatrolPlan {
+  const year = date.getUTCFullYear();
+  if (year < 1000 || year > 9998) throw new PlanError('시작 날짜는 1000년부터 9998년까지 입력해 주세요.');
+  const time = parseTime(timeText);
+  if (time === null) throw new PlanError('시간은 24시간 형식 HH:mm으로 입력해 주세요. 예: 23:17');
+  const at = new Date(Math.floor(date.getTime() / DAY) * DAY + time * MINUTE);
+  return { start: at, end: at, slots: [at], count: 1, minutes: 0, outsideNormalHours: time > 60 && time < 20 * 60 };
+}
+
 const WEEKDAYS = '일월화수목금토';
 
 export function stampDate(v: Wall): string {
@@ -141,4 +151,19 @@ export function assign<T>(slots: (T | null)[], target: number, photo: T): void {
   if (previous === target) return;
   if (previous >= 0) slots[previous] = slots[target];
   slots[target] = photo;
+}
+
+/** Validate the whole selection before replacing anything; a single pair keeps swap semantics. */
+export function assignMany<T>(slots: (T | null)[], targets: number[], photos: T[]): (T | null)[] {
+  if (!targets.length || targets.length !== photos.length) throw new PlanError('선택한 사진과 시간의 개수를 맞춰 주세요.');
+  if (new Set(targets).size !== targets.length || new Set(photos).size !== photos.length || photos.some((p) => p === null)) throw new PlanError('사진과 시간은 중복 없이 선택해 주세요.');
+  if (targets.some((i) => !Number.isInteger(i) || i < 0 || i >= slots.length)) throw new RangeError('target');
+  const result = [...slots];
+  if (targets.length === 1) assign(result, targets[0], photos[0]);
+  else {
+    const moving = new Set(photos);
+    result.forEach((p, i) => { if (p !== null && moving.has(p)) result[i] = null; });
+    targets.forEach((target, i) => { result[target] = photos[i]; });
+  }
+  return result;
 }

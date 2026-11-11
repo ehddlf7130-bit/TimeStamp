@@ -1,17 +1,18 @@
 // 순찰 촬영: each shutter press stamps the selected planned time and advances immediately.
 import { exportFileName, exportName, nextPendingSlot, stampDate, stampTime, type PatrolPlan } from '../core/patrol';
-import { clear, errorMessage, h, toast } from '../dom';
-import { clearPatrol, deleteShot, loadSession, loadShots, persist, saveCapture, saveSession, startPatrol, type PatrolSession, type Shot } from '../store/db';
-import { download, makeZip, shareFiles, type NamedBlob } from '../stamp/export';
+import { clear, errorMessage, focusHeading, h, toast } from '../dom';
+import { deleteShot, loadSession, loadShots, persist, saveCapture, saveSession, startPatrol, type PatrolSession, type Shot } from '../store/db';
+import { download, shareFiles, type NamedBlob } from '../stamp/export';
 import { canvasToBlob, centerCrop, makeCanvas, release, type StampRenderer } from '../stamp/renderer';
 import { PlanForm, planFrom, type PlanInputs } from './planform';
 
-type View = 'setup' | 'camera' | 'gallery';
+export type PatrolView = 'setup' | 'camera' | 'gallery';
 const MAX_CAMERA = 4096;
 
 export class PatrolPage {
   readonly el: HTMLElement;
-  private view: View = 'setup';
+  private view: PatrolView = 'setup';
+  readonly ready: Promise<void>;
   private session?: PatrolSession;
   private plan?: PatrolPlan;
   private shots: Shot[] = [];
@@ -33,7 +34,7 @@ export class PatrolPage {
   private video = h('video', { playsinline: true, muted: true, autoplay: true }) as HTMLVideoElement;
   private overlay = h('canvas', { class: 'overlay' });
   private flash = h('div', { class: 'flash' });
-  private camProgress = h('b');
+  private camProgress = h('h1', { class: 'cam-heading', tabindex: -1 });
   private camStatus = h('span');
   private camStrip = h('div', { class: 'cam-strip' });
   private camMsg = h('div', { class: 'cam-msg', hidden: true });
@@ -46,19 +47,18 @@ export class PatrolPage {
   private overlayKey = '';
   private galleryEl = h('div');
 
-  constructor(inputs: PlanInputs, private renderer: StampRenderer, goCalc: () => void) {
-    this.form = new PlanForm(inputs, () => this.showSetupInfo());
+  constructor(inputs: PlanInputs, private renderer: StampRenderer, private goCalc: () => void,
+    private navigated: (view: PatrolView) => void = () => {}) {
+    this.form = new PlanForm(inputs);
     this.setupEl = h('div', null,
-      h('header', { class: 'page-head' }, h('h1', null, '순찰 촬영'),
-        h('p', null, '정한 순찰 시각을 순서대로 찍습니다. 23:00~23:30이면 셔터를 누를 때마다 23:05 → 23:10 → … → 23:30으로 바로 넘어갑니다.')),
+      h('header', { class: 'page-head' }, h('p', { class: 'eyebrow' }, '순찰 · 1 / 3단계'), h('h1', null, '촬영 준비'),
+        h('p', null, '계산기에서 정한 계획을 확인하고 촬영을 시작하세요.')),
       this.setupInfo,
-      h('div', { class: 'card' }, this.form.el,
-        h('button', { class: 'ghost block', onclick: goCalc }, '계산기에서 확인하기')),
       h('div', { class: 'card' },
         h('label', { class: 'field' }, h('span', null, '저장 해상도'), this.size),
         h('label', { class: 'check' }, this.autoShare, h('span', null, '찍을 때마다 바로 저장 (공유 시트 열기)')),
-        this.startButton));
-    for (const f of [this.form.date, this.form.start, this.form.end]) f.addEventListener('change', () => this.showSetupInfo());
+        this.startButton),
+      h('nav', { class: 'step-actions', 'aria-label': '단계 이동' }, h('button', { class: 'secondary block', onclick: goCalc }, '이전')));
 
     const viewport = h('div', { class: 'viewport' }, this.video, this.overlay, this.flash, this.camMsg);
     this.cameraEl = h('div', { class: 'camera', hidden: true },
@@ -68,23 +68,39 @@ export class PatrolPage {
       viewport, this.camStrip,
       h('div', { class: 'cam-controls' }, this.lastThumb, this.shutter, h('span')));
     new ResizeObserver(() => this.sizeOverlay()).observe(viewport);
-    this.el = h('section', { class: 'page' }, this.setupEl, this.galleryEl);
+    this.el = h('section', { class: 'page', 'data-page': 'patrol', hidden: true }, this.setupEl, this.galleryEl);
     document.body.append(this.cameraEl);
     document.addEventListener('visibilitychange', () => {
       if (this.view !== 'camera') return;
       if (document.hidden) this.stopCamera();
       else void this.startCamera();
     });
-    void this.restore();
+    this.ready = this.restore();
+  }
+
+  get hasSession() { return !!this.session; }
+  get currentView() { return this.view; }
+  get isBusy() { return this.capturing || this.startButton.disabled; }
+
+  async openSaved(view: 'camera' | 'gallery') {
+    await this.ready;
+    if (!this.session || this.capturing) return;
+    if (view === 'camera') await this.resume();
+    else this.show('gallery');
+  }
+
+  showView(view: PatrolView) {
+    if (this.capturing) return;
+    this.show(view !== 'setup' && !this.session ? 'setup' : view, false);
   }
 
   setInputs(inputs: PlanInputs) {
     this.form.set(inputs);
-    if (this.view !== 'camera') this.show('setup');
+    this.show('setup', false);
   }
 
   hidden() {
-    if (this.view === 'camera') this.show(this.session ? 'gallery' : 'setup');
+    if (this.view === 'camera') this.show(this.session ? 'gallery' : 'setup', false);
   }
 
   private async restore() {
@@ -95,7 +111,6 @@ export class PatrolPage {
         // Upgrade the former low-resolution default once; retain later choices.
         this.session = { ...session, size: session.resolutionVersion ? session.size : session.size === 1080 ? 3240 : session.size, resolutionVersion: 1 };
         this.shots = shots.sort((a, b) => a.time - b.time);
-        this.form.set(session);
         this.size.value = String(this.session.size);
         this.autoShare.checked = session.autoShare;
         this.slot = this.nextSlot();
@@ -126,26 +141,19 @@ export class PatrolPage {
 
   private showSetupInfo() {
     const box = this.setupInfo;
-    if (this.session && this.plan) {
-      clear(box, h('h2', null, '진행 중인 순찰'),
-        h('p', null, `${stampDate(this.plan.slots[0])} ${this.session.start}~${this.session.end}`),
-        h('p', { class: 'big' }, h('strong', null, String(this.planned().size)), ` / ${this.plan.count}장 촬영`),
-        h('div', { class: 'row2' },
-          h('button', { class: 'primary', onclick: () => void this.resume() }, '이어서 촬영'),
-          h('button', { class: 'secondary', onclick: () => this.show('gallery') }, '보관함')),
-        h('p', { class: 'muted' }, '새 순찰을 시작하면 이 순찰의 사진은 삭제됩니다. 먼저 저장해 주세요.'));
+    try {
+      const plan = this.form.plan();
+      clear(box, h('h2', null, '촬영할 계획'),
+        h('p', null, `${stampDate(plan.slots[0])} · ${this.form.get().mode === 'single' ? `단일 시각 ${this.form.get().start}` : `${this.form.get().start}~${this.form.get().end}`}`),
+        h('p', { class: 'big' }, h('strong', null, String(plan.count)), '장'),
+        h('p', null, `첫 ${stampTime(plan.slots[0])} · 마지막 ${stampTime(plan.slots[plan.count - 1])}`),
+        h('p', { class: 'muted' }, this.form.get().mode === 'single' ? '지정한 시각으로 한 번 촬영하면 보관함으로 이동합니다.' : '저장에 성공하면 다음 계획 시각으로 넘어갑니다. 기다리지 않고 연속으로 찍을 수 있습니다.'),
+        plan.outsideNormalHours && h('p', { class: 'warn' }, '20:00~다음 날 01:00 밖의 시간이 포함되어 있습니다.'),
+        this.shots.length > 0 && h('p', { class: 'warn' }, `기존 순찰 사진 ${this.shots.length}장은 새 촬영을 시작할 때 교체 여부를 확인합니다. 이전으로 돌아가기만 하면 사진은 유지됩니다.`));
       box.classList.remove('error');
-    } else {
-      try {
-        const plan = this.form.plan();
-        clear(box, h('p', null, h('strong', null, `사진 ${plan.count}장`), ` · 첫 ${stampTime(plan.slots[0])} · 마지막 ${stampTime(plan.slots[plan.count - 1])}`),
-          h('p', { class: 'muted' }, '촬영할 때마다 계획 시각이 5분씩 넘어갑니다. 기다리지 않고 연속으로 찍을 수 있습니다.'),
-          plan.outsideNormalHours && h('p', { class: 'warn' }, '20:00~다음 날 01:00 밖의 시간이 포함되어 있습니다.'));
-        box.classList.remove('error');
-      } catch (e) {
-        clear(box, h('p', null, errorMessage(e)));
-        box.classList.add('error');
-      }
+    } catch (e) {
+      clear(box, h('p', null, errorMessage(e)));
+      box.classList.add('error');
     }
     box.hidden = false;
   }
@@ -179,19 +187,24 @@ export class PatrolPage {
     } catch (e) { toast(errorMessage(e)); }
   }
 
-  private show(view: View) {
+  private show(view: PatrolView, notify = true) {
+    if (view === 'camera' && this.el.hidden) return;
     this.view = view;
     this.setupEl.hidden = view !== 'setup';
     this.galleryEl.hidden = view !== 'gallery';
     this.cameraEl.hidden = view !== 'camera';
     document.body.classList.toggle('camera-open', view === 'camera');
     if (view === 'camera') {
+      if (this.plan && !this.plan.slots[this.slot]) this.slot = 0;
       this.overlayKey = '';
       this.updateCamera();
+      this.camProgress.focus({ preventScroll: true });
       void this.startCamera();
     } else this.stopCamera();
     if (view === 'gallery') this.renderGallery();
     if (view === 'setup') this.showSetupInfo();
+    if (notify && !this.el.hidden) this.navigated(view);
+    if (view !== 'camera' && !this.el.hidden) focusHeading(this.el);
   }
 
   private async startCamera() {
@@ -335,7 +348,7 @@ export class PatrolPage {
 
   private named(shots: Shot[]): NamedBlob[] {
     return [...shots].sort((a, b) => a.time - b.time).map((s, i) => ({
-      name: s.slotIndex === undefined ? exportFileName(i, new Date(s.time)) : exportName(i, new Date(s.time), false), blob: s.blob,
+      name: s.slotIndex === undefined ? exportFileName(i, new Date(s.time)) : exportName(s.slotIndex, new Date(s.time), false), blob: s.blob,
     }));
   }
 
@@ -346,6 +359,11 @@ export class PatrolPage {
     }));
   }
 
+  private async share(shots: Shot[]) {
+    try { toast(await shareFiles(this.named(shots)) ? '사진 공유를 마쳤습니다.' : '공유를 취소했습니다.'); }
+    catch (e) { toast(errorMessage(e)); }
+  }
+
   private renderGallery() {
     if (!this.plan || !this.session) { clear(this.galleryEl); return; }
     const plan = this.plan;
@@ -353,40 +371,27 @@ export class PatrolPage {
     const pending = plan.slots.filter((_, i) => !taken.has(i));
     const legacy = this.shots.filter((s) => s.slotIndex === undefined).length;
     clear(this.galleryEl,
-      h('header', { class: 'page-head' }, h('h1', null, '순찰 보관함'),
-        h('p', null, `${stampDate(plan.slots[0])} ${this.session.start}~${this.session.end} · ${taken.size} / ${plan.count}장 촬영`)),
+      h('header', { class: 'page-head' }, h('p', { class: 'eyebrow' }, '순찰 · 3 / 3단계'), h('h1', null, '순찰 보관함'),
+        h('p', null, `${stampDate(plan.slots[0])} ${this.session.mode === 'single' ? this.session.start : `${this.session.start}~${this.session.end}`} · ${taken.size} / ${plan.count}장 촬영`)),
       h('div', { class: 'card' },
         h('button', { class: 'primary block big-btn', onclick: () => void this.resume() }, pending.length ? '이어서 촬영' : '사진 다시 찍기'),
-        h('div', { class: 'row2' },
-          h('button', { class: 'secondary', disabled: !this.shots.length, onclick: () => void shareFiles(this.named(this.shots)).catch((e) => toast(errorMessage(e))) }, '모두 저장 (공유)'),
-          h('button', { class: 'secondary', disabled: !this.shots.length, onclick: () => void this.zipAll() }, 'ZIP 다운로드')),
+        h('button', { class: 'secondary block', disabled: !this.shots.length, onclick: () => void this.share(this.shots) }, '모두 저장 (공유)'),
+        h('p', { class: 'muted' }, '사진을 열면 개별 저장과 이미지 다운로드를 사용할 수 있습니다.'),
         h('p', { class: pending.length ? 'muted' : 'ok' }, pending.length
           ? `남은 시각 ${pending.length}개: ${pending.slice(0, 8).map(stampTime).join(', ')}${pending.length > 8 ? ' …' : ''}`
           : '모든 계획 시각의 사진을 촬영했습니다.'),
         legacy > 0 && h('p', { class: 'muted' }, `이전 버전에서 찍은 사진 ${legacy}장은 그대로 보관합니다. 새 촬영은 계획 시각 순서대로 진행합니다.`),
-        h('button', { class: 'ghost block', onclick: () => void this.newPatrol() }, '새 순찰 시작')),
+        h('button', { class: 'ghost block', onclick: () => this.newPatrol() }, '새 순찰 시작')),
       this.shots.length ? h('div', { class: 'grid' }, this.shots.map((s) => h('button', { class: 'tile', onclick: () => this.openShot(s) },
         h('img', { src: this.url(s), alt: '' }), h('small', null, stampTime(new Date(s.time))),
         h('small', null, s.slotIndex === undefined ? '이전 촬영 사진' : `${s.slotIndex + 1}번째 계획 시각`))))
-        : h('p', { class: 'empty' }, '아직 찍은 사진이 없습니다.'));
+        : h('p', { class: 'empty' }, '아직 찍은 사진이 없습니다.'),
+      h('nav', { class: 'step-actions', 'aria-label': '단계 이동' }, h('button', { class: 'secondary block', onclick: this.goCalc }, '계산기로')));
   }
 
-  private async zipAll() {
-    try {
-      toast('ZIP 만드는 중…');
-      download(await makeZip(this.named(this.shots)), `patrol_${exportName(0, this.plan!.slots[0], false).slice(4, 17)}.zip`);
-    } catch (e) { toast(errorMessage(e)); }
-  }
-
-  private async newPatrol() {
+  private newPatrol() {
     if (this.capturing) return toast('사진 저장이 끝난 뒤 다시 시도해 주세요.');
-    if (this.shots.length && !confirm(`사진 ${this.shots.length}장이 이 브라우저에서 삭제됩니다. 저장하셨나요?\n새 순찰을 시작할까요?`)) return;
-    try {
-      await clearPatrol();
-      this.revokeAll(); this.shots = [];
-      this.session = undefined; this.plan = undefined; this.slot = 0;
-      this.show('setup');
-    } catch (e) { toast(errorMessage(e)); }
+    this.goCalc();
   }
 
   private openShot(shot: Shot) {
@@ -401,7 +406,7 @@ export class PatrolPage {
         close(); this.slot = shot.slotIndex!; this.show('camera');
       } }, '이 시각 다시 찍기'),
       h('div', { class: 'row2' },
-        h('button', { class: 'primary', onclick: () => void shareFiles(this.named([shot])).catch((e) => toast(errorMessage(e))) }, '저장'),
+        h('button', { class: 'primary', onclick: () => void this.share([shot]) }, '저장'),
         h('button', { class: 'ghost danger', onclick: async () => {
           if (this.capturing || !confirm('이 사진을 삭제할까요?')) return;
           try {
@@ -411,7 +416,9 @@ export class PatrolPage {
             close(); this.renderGallery();
           } catch (e) { toast(errorMessage(e)); }
         } }, '삭제')),
+      h('button', { class: 'secondary block', onclick: () => { const item = this.named([shot])[0]; download(item.blob, item.name); } }, '이미지 다운로드'),
       h('button', { class: 'ghost block', onclick: close }, '닫기'));
+    dlg.addEventListener('cancel', (e) => { e.preventDefault(); close(); });
     document.body.append(dlg); dlg.showModal();
   }
 }

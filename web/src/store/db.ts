@@ -4,6 +4,7 @@ export interface PatrolSession {
   date: string;      // YYYY-MM-DD
   start: string;     // HH:mm
   end: string;       // HH:mm
+  mode?: 'range' | 'single'; // omitted by older range sessions
   size: number;      // output px, 0 = camera maximum
   autoShare: boolean;
   nextSlot?: number; // next planned slot; optional for sessions saved by the old version

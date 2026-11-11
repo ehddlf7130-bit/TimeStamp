@@ -1,6 +1,7 @@
 // Port of tests/TimeStamp.Checks/Program.cs.
 import { describe, expect, it } from 'vitest';
-import { addMinutes, arrange, assign, createPlan, exportName, hhmm, isoDate, koreaToday, nextPendingSlot, PlanError, stampDate, stampTime, wall } from '../src/core/patrol';
+import { addMinutes, arrange, assign, assignMany, createPlan, createSinglePlan, exportName, hhmm, isoDate, koreaToday, nextPendingSlot, PlanError, stampDate, stampTime, wall } from '../src/core/patrol';
+import { planFrom } from '../src/pages/planform';
 
 const date = wall(2026, 11, 9);
 const minutes = (a: Date, b: Date) => (b.getTime() - a.getTime()) / 60_000;
@@ -59,6 +60,57 @@ describe('StampText', () => {
   it('export file name', () => expect(exportName(0, wall(2026, 11, 9, 23, 35), false)).toBe('001_20261109_2335.jpg'));
   it('PNG export file name', () => expect(exportName(5, wall(2026, 11, 10, 0, 5), true)).toBe('006_20261110_0005.png'));
   it('Korea today ignores device time zone', () => expect(koreaToday(new Date('2026-11-09T16:00:00Z'))).toBe('2026-11-10'));
+});
+
+describe('single-time plans and stored session compatibility', () => {
+  it('uses exactly 23:17 on the selected date without adding five minutes', () => {
+    const plan = createSinglePlan(wall(2026, 11, 11), '23:17');
+    expect(plan.count).toBe(1); expect(plan.minutes).toBe(0);
+    expect(plan.slots).toEqual([wall(2026, 11, 11, 23, 17)]);
+    expect(plan.start).toEqual(plan.end);
+    expect(nextPendingSlot(plan.count, [0])).toBe(1);
+  });
+  it('does not parse the unused end time in single mode', () => {
+    expect(planFrom({ date: '2026-11-11', start: '00:00', end: '', mode: 'single' }).slots).toEqual([wall(2026, 11, 11)]);
+  });
+  it('keeps old sessions without a mode as five-minute range plans', () => {
+    expect(planFrom({ date: '2026-11-11', start: '23:00', end: '23:30' }).slots.map(hhmm))
+      .toEqual(['23:05', '23:10', '23:15', '23:20', '23:25', '23:30']);
+  });
+  it('validates the date and exact minute', () => {
+    expect(() => planFrom({ date: '2026-02-30', start: '23:17', end: '', mode: 'single' })).toThrow(PlanError);
+    expect(() => createSinglePlan(date, '24:00')).toThrow(PlanError);
+    expect(() => createSinglePlan(wall(9999, 1, 1), '23:17')).toThrow(PlanError);
+    expect(createSinglePlan(date, '12:17').outsideNormalHours).toBe(true);
+    expect(createSinglePlan(date, '00:17').outsideNormalHours).toBe(false);
+  });
+});
+
+describe('multi-photo placement', () => {
+  it('places ordered pairs in one operation without changing other slots', () => {
+    const original = ['A', 'B', 'C', 'D', null];
+    expect(assignMany(original, [2, 4], ['A', 'B'])).toEqual([null, null, 'A', 'D', 'B']);
+    expect(original).toEqual(['A', 'B', 'C', 'D', null]);
+  });
+  it('moves cycles simultaneously without duplicating any selected photo', () => {
+    expect(assignMany(['A', 'B', 'C'], [0, 1, 2], ['C', 'A', 'B'])).toEqual(['C', 'A', 'B']);
+    expect(assignMany(['A', 'B', 'C', 'D'], [1, 3], ['A', 'C'])).toEqual([null, 'A', null, 'C']);
+  });
+  it('preserves the existing swap rule for one photo and one time', () => {
+    expect(assignMany(['A', 'B', null], [1], ['A'])).toEqual(['B', 'A', null]);
+  });
+  it('rejects mismatched counts atomically', () => {
+    const original = ['A', 'B', 'C'];
+    expect(() => assignMany(original, [0, 1], ['C'])).toThrow('개수를 맞춰');
+    expect(original).toEqual(['A', 'B', 'C']);
+  });
+  it('rejects empty, duplicate, or invalid selections before modifying slots', () => {
+    const original = ['A', 'B', 'C'];
+    for (const [targets, photos] of [[[], []], [[0, 0], ['A', 'B']], [[0, 1], ['A', 'A']], [[0, 9], ['A', 'B']]] as [number[], string[]][]) {
+      expect(() => assignMany(original, targets, photos)).toThrow();
+      expect(original).toEqual(['A', 'B', 'C']);
+    }
+  });
 });
 
 describe('planned patrol capture', () => {

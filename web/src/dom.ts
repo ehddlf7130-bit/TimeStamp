@@ -34,6 +34,15 @@ export function errorMessage(e: unknown): string {
   return e instanceof Error ? e.message : String(e);
 }
 
+/** Open each screen at its heading, including for keyboard and screen-reader users. */
+export function focusHeading(root: HTMLElement) {
+  const heading = [...root.querySelectorAll<HTMLElement>('h1')].find((h) => !h.closest('[hidden]'));
+  if (!heading || root.hidden) return;
+  heading.tabIndex = -1;
+  heading.focus({ preventScroll: true });
+  window.scrollTo(0, 0);
+}
+
 /** Load an image file with EXIF orientation applied (Safari/Chrome apply it to <img> by default). */
 export function loadFileImage(file: Blob): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
