@@ -36,13 +36,19 @@ export async function verifyWorkflow(page, out, check) {
     const [download] = await Promise.all([page.waitForEvent('download'), locator.click()]);
     return { name: download.suggestedFilename(), bytes: readFileSync(await download.path()) };
   };
+  const photoDate = (bytes) => bytes.toString('latin1', 0, 256).match(/\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2}/)?.[0];
   const shareMode = (mode) => page.evaluate((mode) => {
     window.__shareMode = mode;
     Object.defineProperty(navigator, 'canShare', { configurable: true, value: () => window.__shareMode !== 'unsupported' });
     Object.defineProperty(navigator, 'share', { configurable: true, value: async ({ files }) => {
       if (window.__shareMode === 'cancel') throw new DOMException('Cancelled', 'AbortError');
       if (window.__shareMode === 'failure') throw new Error('Simulated sharing failure');
-      window.__shared = await Promise.all(files.map(async (file) => ({ name: file.name, type: file.type, size: file.size, signature: [...new Uint8Array(await file.slice(0, 4).arrayBuffer())] })));
+      window.__shared = await Promise.all(files.map(async (file) => {
+        const header = new Uint8Array(await file.slice(0, 256).arrayBuffer());
+        const text = new TextDecoder('latin1').decode(header);
+        return { name: file.name, type: file.type, size: file.size, lastModified: file.lastModified,
+          signature: [...header.slice(0, 4)], photoDate: text.match(/\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2}/)?.[0], koreanOffset: text.includes('+09:00') };
+      }));
     } });
   }, mode);
   await page.clock.setFixedTime(new Date('2026-11-11T11:05:10Z'));
@@ -113,6 +119,9 @@ export async function verifyWorkflow(page, out, check) {
   await screenshot('mobile-gallery');
   await button('이어서 촬영').click(); await cameraReady();
   check((await title()).includes('4 / 6') && (await title()).includes('오후 11:20'), 'saved patrol resumes at the correct planned time');
+  // Deliberately take the last time before the two preceding ones: IDs/import
+  // order must never override the planned dates in exported files.
+  await page.locator('.cam-strip .cell').nth(5).click();
   for (let i = 0; i < 3; i++) await capture();
   await page.waitForSelector('.grid .tile');
   check(await visible().locator('.grid .tile').count() === 6 && (await stored()).session.nextSlot === 6, 'sixth photo finishes the plan and opens the gallery');
@@ -120,11 +129,17 @@ export async function verifyWorkflow(page, out, check) {
   await shareMode('success'); await button('모두 저장 (공유)').click();
   await page.waitForFunction(() => window.__shared?.length === 6);
   check(await page.evaluate(() => window.__shared.length === 6 && window.__shared.every((f) => f.type === 'image/jpeg' && f.signature[0] === 255 && f.signature[1] === 216)), 'gallery shares six actual JPEG Blobs');
+  check(await page.evaluate(() => window.__shared.every((f, i) =>
+    f.name === `${String(i + 1).padStart(3, '0')}_20261111_23${String(5 * (i + 1)).padStart(2, '0')}.jpg`
+    && f.photoDate === `2026:11:11 23:${String(5 * (i + 1)).padStart(2, '0')}:00`
+    && f.koreanOffset && f.lastModified === Date.UTC(2026, 10, 11, 14, 5 * (i + 1)))),
+  'out-of-order captures and retakes share in planned order with EXIF and real Korean file timestamps');
   const patrolNames = [];
   for (let i = 0; i < 6; i++) {
     await visible().locator('.grid .tile').nth(i).click();
     const file = await downloaded(page.locator('dialog').getByRole('button', { name: '이미지 다운로드', exact: true }));
     patrolNames.push(file.name);
+    check(photoDate(file.bytes) === `2026:11:11 23:${String(5 * (i + 1)).padStart(2, '0')}:00`, `individual patrol download ${i + 1} carries its planned EXIF date`);
     if (i === 0) { check(await dimensions(file.bytes) === '3240x3240', 'individual camera download retains 3240 dimensions'); writeFileSync(join(out, 'patrol-001.jpg'), file.bytes); }
     await page.locator('dialog').getByRole('button', { name: '닫기', exact: true }).click();
   }
@@ -143,6 +158,10 @@ export async function verifyWorkflow(page, out, check) {
   await button('순찰 시작').click(); await cameraReady();
   for (let i = 0; i < 4; i++) await capture();
   check((await stored()).shots.map((s) => s.time).join() === [Date.UTC(2026, 10, 11, 23, 55), Date.UTC(2026, 10, 12, 0, 0), Date.UTC(2026, 10, 12, 0, 5), Date.UTC(2026, 10, 12, 0, 10)].join(), 'range captures still roll the date over at midnight');
+  await shareMode('success'); await button('모두 저장 (공유)').click();
+  await page.waitForFunction(() => window.__shared?.length === 4);
+  check(await page.evaluate(() => window.__shared.map((f) => f.photoDate).join() === '2026:11:11 23:55:00,2026:11:12 00:00:00,2026:11:12 00:05:00,2026:11:12 00:10:00'
+    && window.__shared.every((f, i, files) => f.koreanOffset && (!i || f.lastModified > files[i - 1].lastModified))), 'midnight share preserves next-day EXIF dates and increasing file timestamps');
   await button('새 순찰 시작').click(); await configure('single', '23:17', '', '순찰 촬영');
   check(await visible().getByLabel('종료', { exact: true }).isVisible() === false, 'single mode hides the unused end field');
   await next(); await button('순찰 시작').click(); await cameraReady();
@@ -156,20 +175,32 @@ export async function verifyWorkflow(page, out, check) {
   await page.evaluate(() => new Promise((resolve, reject) => {
     const req = indexedDB.open('patrol-camera', 1);
     req.onsuccess = () => {
-      const db = req.result, tx = db.transaction(['shots', 'meta'], 'readwrite'), store = tx.objectStore('shots');
-      const read = store.getAll();
-      read.onsuccess = () => {
-        const shot = read.result[0]; store.clear();
-        store.put({ id: 1, time: Date.UTC(2026, 10, 11, 20, 5), blob: shot.blob, thumb: shot.thumb });
+      const db = req.result, read = db.transaction('shots').objectStore('shots').getAll();
+      read.onsuccess = async () => {
+        const shot = read.result[0];
+        const header = new DataView(await shot.blob.slice(0, 6).arrayBuffer());
+        const blob = new Blob([shot.blob.slice(0, 2), shot.blob.slice(4 + header.getUint16(4))], { type: 'image/jpeg' });
+        const tx = db.transaction(['shots', 'meta'], 'readwrite'), store = tx.objectStore('shots');
+        store.clear();
+        store.put({ id: 1, time: Date.UTC(2026, 10, 11, 20, 5), blob, thumb: shot.thumb });
         tx.objectStore('meta').put({ date: '2026-11-11', start: '23:00', end: '23:30', size: 1080, autoShare: false }, 'session');
+        tx.oncomplete = () => { db.close(); resolve(); }; tx.onerror = () => reject(tx.error);
       };
-      tx.oncomplete = () => { db.close(); resolve(); }; tx.onerror = () => reject(tx.error);
+      read.onerror = () => reject(read.error);
     };
   }));
   await page.reload(); await page.waitForSelector('[data-page=calc]:visible'); await button('이어서 촬영').click(); await cameraReady();
   await capture(); await page.locator('.cam-top').getByRole('button', { name: '보관함', exact: true }).click();
   const migrated = await stored();
   check(migrated.shots.length === 2 && migrated.shots.some((s) => s.id === 1 && s.slotIndex === undefined) && migrated.session.size === 3240 && migrated.session.resolutionVersion === 1, 'legacy photos remain intact and new captures upgrade old resolution settings');
+  await shareMode('success'); await button('모두 저장 (공유)').click();
+  await page.waitForFunction(() => window.__shared?.length === 2);
+  check(await page.evaluate(() => window.__shared[0].photoDate === '2026:11:11 20:05:00'
+    && window.__shared[0].lastModified === Date.UTC(2026, 10, 11, 11, 5) && window.__shared[0].koreanOffset), 'restored metadata-free legacy photo exports with its original date');
+  await visible().locator('.grid .tile').first().click();
+  const legacyDownload = await downloaded(page.locator('dialog').getByRole('button', { name: '이미지 다운로드', exact: true }));
+  check(photoDate(legacyDownload.bytes) === '2026:11:11 20:05:00', 'legacy individual download carries the corrected date without retaking the photo');
+  await page.locator('dialog').getByRole('button', { name: '닫기', exact: true }).click();
   await button('계산기로').click();
   await configure('range', '00:00', '00:30', '스탬프 찍기'); await next();
   check(await heading() === '사진 선택' && await visible().locator('[data-step=placement]:visible').count() === 0, 'stamp photo selection is a distinct screen');

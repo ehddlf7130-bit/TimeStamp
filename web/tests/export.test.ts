@@ -13,6 +13,15 @@ describe('photo sharing', () => {
     expect(file.name).toBe(items[0].name); expect(file.type).toBe('image/jpeg');
     expect(await file.text()).toBe('photo bytes');
   });
+  it('preserves planned file dates instead of assigning the time of the share tap', async () => {
+    const share = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('navigator', { canShare: () => true, share });
+    const dates = ['2026-11-11T14:55:00Z', '2026-11-11T15:00:00Z', '2026-11-11T15:05:00Z'].map(Date.parse);
+    await shareFiles(dates.map((lastModified, i) => ({ ...items[0], name: `${i + 1}.jpg`, lastModified })));
+    const files = share.mock.calls[0][0].files as File[];
+    expect(files.map((file) => file.lastModified)).toEqual(dates);
+    expect(files.map((file) => file.name)).toEqual(['1.jpg', '2.jpg', '3.jpg']);
+  });
   it('reports cancellation as false instead of a completed save', async () => {
     vi.stubGlobal('navigator', { canShare: () => true, share: () => Promise.reject(new DOMException('Cancelled', 'AbortError')) });
     expect(await shareFiles(items)).toBe(false);

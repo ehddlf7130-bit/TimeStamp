@@ -1,5 +1,6 @@
 // 순찰 촬영: each shutter press stamps the selected planned time and advances immediately.
 import { exportFileName, exportName, nextPendingSlot, stampDate, stampTime, type PatrolPlan } from '../core/patrol';
+import { koreaTimestamp, withCaptureTime } from '../core/exif';
 import { clear, errorMessage, focusHeading, h, toast } from '../dom';
 import { deleteShot, loadSession, loadShots, persist, saveCapture, saveSession, startPatrol, type PatrolSession, type Shot } from '../store/db';
 import { download, shareFiles, type NamedBlob } from '../stamp/export';
@@ -110,7 +111,9 @@ export class PatrolPage {
         this.plan = planFrom(session);
         // Upgrade the former low-resolution default once; retain later choices.
         this.session = { ...session, size: session.resolutionVersion ? session.size : session.size === 1080 ? 3240 : session.size, resolutionVersion: 1 };
-        this.shots = shots.sort((a, b) => a.time - b.time);
+        this.shots = await Promise.all(shots.sort((a, b) => a.time - b.time).map(async (shot) => ({
+          ...shot, blob: await withCaptureTime(shot.blob, new Date(shot.time)),
+        })));
         this.size.value = String(this.session.size);
         this.autoShare.checked = session.autoShare;
         this.slot = this.nextSlot();
@@ -309,7 +312,9 @@ export class PatrolPage {
       release(frame);
       const thumb = makeCanvas(160, 160); canvases.push(thumb);
       thumb.getContext('2d')!.drawImage(out, 0, 0, 160, 160);
-      const [blob, thumbBlob] = await Promise.all([canvasToBlob(out, false), canvasToBlob(thumb, false)]);
+      const [blob, thumbBlob] = await Promise.all([
+        canvasToBlob(out, false).then((jpeg) => withCaptureTime(jpeg, time)), canvasToBlob(thumb, false),
+      ]);
       const previous = this.planned().get(slotIndex);
       const id = previous?.id ?? Math.max(Date.now(), ...this.shots.map((s) => s.id + 1));
       const shot: Shot = { id, time: time.getTime(), slotIndex, blob, thumb: thumbBlob };
@@ -349,6 +354,7 @@ export class PatrolPage {
   private named(shots: Shot[]): NamedBlob[] {
     return [...shots].sort((a, b) => a.time - b.time).map((s, i) => ({
       name: s.slotIndex === undefined ? exportFileName(i, new Date(s.time)) : exportName(s.slotIndex, new Date(s.time), false), blob: s.blob,
+      lastModified: koreaTimestamp(new Date(s.time)),
     }));
   }
 
