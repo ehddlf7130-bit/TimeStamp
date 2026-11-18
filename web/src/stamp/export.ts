@@ -21,6 +21,36 @@ export async function shareFiles(items: NamedBlob[]): Promise<boolean> {
   }
 }
 
+/**
+ * Saves photos one share sheet at a time, in the given order.
+ * iPhone's "이미지 N개 저장" writes a multi-file share concurrently and dates each photo
+ * by when it was saved, not by its EXIF, so even the Photos "Date Captured" view
+ * shows a batch out of order. One file per share makes the save order the
+ * chronological order. Each call to next() must come from its own tap.
+ */
+export class OrderedShare {
+  private index = 0;
+  private busy = false;
+  constructor(readonly items: NamedBlob[], private share: (items: NamedBlob[]) => Promise<boolean> = shareFiles) {}
+
+  get saved() { return this.index; }
+  get done() { return this.index >= this.items.length; }
+  get current(): NamedBlob | undefined { return this.items[this.index]; }
+
+  /** true: this photo was saved. false: cancelled, or a sheet is still open. Throws on failure; the same photo is retried. */
+  async next(): Promise<boolean> {
+    const item = this.current;
+    if (!item || this.busy) return false;
+    this.busy = true;
+    try {
+      // Called without awaiting first, so the share stays within the user's tap.
+      const ok = await this.share([item]);
+      if (ok) this.index++;
+      return ok;
+    } finally { this.busy = false; }
+  }
+}
+
 export function download(blob: Blob, name: string) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');

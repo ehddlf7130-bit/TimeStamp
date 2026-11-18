@@ -38,7 +38,7 @@ export async function verifyWorkflow(page, out, check) {
   };
   const photoDate = (bytes) => bytes.toString('latin1', 0, 256).match(/\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2}/)?.[0];
   const shareMode = (mode) => page.evaluate((mode) => {
-    window.__shareMode = mode;
+    window.__shareMode = mode; window.__shareLog = [];
     Object.defineProperty(navigator, 'canShare', { configurable: true, value: () => window.__shareMode !== 'unsupported' });
     Object.defineProperty(navigator, 'share', { configurable: true, value: async ({ files }) => {
       if (window.__shareMode === 'cancel') throw new DOMException('Cancelled', 'AbortError');
@@ -49,8 +49,33 @@ export async function verifyWorkflow(page, out, check) {
         return { name: file.name, type: file.type, size: file.size, lastModified: file.lastModified,
           signature: [...header.slice(0, 4)], photoDate: text.match(/\d{4}:\d{2}:\d{2} \d{2}:\d{2}:\d{2}/)?.[0], koreanOffset: text.includes('+09:00') };
       }));
+      (window.__shareLog ??= []).push(window.__shared);
     } });
   }, mode);
+  // iPhone saves a multi-file share concurrently and dates photos by save time,
+  // so "모두 저장" must open one sheet per photo, oldest first, each from its own tap.
+  const saveAllInOrder = async (count, { cancelAt } = {}) => {
+    await shareMode('success'); await button('모두 저장 (공유)').click();
+    const saver = page.getByRole('dialog', { name: '시간순 저장' });
+    for (let i = 1; i < count; i++) {
+      await page.waitForFunction((n) => window.__shareLog.length === n, i);
+      if (i === 1 && cancelAt) await screenshot('mobile-ordered-save');
+      if (i === cancelAt) {
+        await page.evaluate(() => { window.__shareMode = 'cancel'; });
+        await saver.getByRole('button', { name: '다음 사진 저장', exact: true }).click();
+        await saver.getByText('저장을 취소했습니다', { exact: false }).waitFor();
+        check((await saver.getByRole('status').innerText()).startsWith(`${i + 1} / ${count} ·`)
+          && await page.evaluate((n) => window.__shareLog.length === n, i), 'cancelling one photo keeps that same photo next');
+        await page.evaluate(() => { window.__shareMode = 'success'; });
+      }
+      await saver.getByRole('button', { name: '다음 사진 저장', exact: true }).click();
+    }
+    await page.waitForFunction((n) => window.__shareLog.length === n, count);
+    await saver.waitFor({ state: 'detached' });
+    const calls = await page.evaluate(() => window.__shareLog.map((files) => files.length));
+    check(calls.length === count && calls.every((n) => n === 1), `save all opens ${count} single-photo share sheets in sequence`);
+    await page.evaluate(() => { window.__shared = window.__shareLog.flat(); });
+  };
   await page.clock.setFixedTime(new Date('2026-11-11T11:05:10Z'));
   await page.goto('http://127.0.0.1:5199/TimeStamp/');
   await page.waitForSelector('[data-page=calc]:visible');
@@ -126,8 +151,7 @@ export async function verifyWorkflow(page, out, check) {
   await page.waitForSelector('.grid .tile');
   check(await visible().locator('.grid .tile').count() === 6 && (await stored()).session.nextSlot === 6, 'sixth photo finishes the plan and opens the gallery');
   check(await page.evaluate(() => document.querySelector('.camera video').srcObject === null), 'finishing releases the camera');
-  await shareMode('success'); await button('모두 저장 (공유)').click();
-  await page.waitForFunction(() => window.__shared?.length === 6);
+  await saveAllInOrder(6, { cancelAt: 2 });
   check(await page.evaluate(() => window.__shared.length === 6 && window.__shared.every((f) => f.type === 'image/jpeg' && f.signature[0] === 255 && f.signature[1] === 216)), 'gallery shares six actual JPEG Blobs');
   check(await page.evaluate(() => window.__shared.every((f, i) =>
     f.name === `${String(i + 1).padStart(3, '0')}_20261111_23${String(5 * (i + 1)).padStart(2, '0')}.jpg`
@@ -158,8 +182,7 @@ export async function verifyWorkflow(page, out, check) {
   await button('순찰 시작').click(); await cameraReady();
   for (let i = 0; i < 4; i++) await capture();
   check((await stored()).shots.map((s) => s.time).join() === [Date.UTC(2026, 10, 11, 23, 55), Date.UTC(2026, 10, 12, 0, 0), Date.UTC(2026, 10, 12, 0, 5), Date.UTC(2026, 10, 12, 0, 10)].join(), 'range captures still roll the date over at midnight');
-  await shareMode('success'); await button('모두 저장 (공유)').click();
-  await page.waitForFunction(() => window.__shared?.length === 4);
+  await saveAllInOrder(4);
   check(await page.evaluate(() => window.__shared.map((f) => f.photoDate).join() === '2026:11:11 23:55:00,2026:11:12 00:00:00,2026:11:12 00:05:00,2026:11:12 00:10:00'
     && window.__shared.every((f, i, files) => f.koreanOffset && (!i || f.lastModified > files[i - 1].lastModified))), 'midnight share preserves next-day EXIF dates and increasing file timestamps');
   await button('새 순찰 시작').click(); await configure('single', '23:17', '', '순찰 촬영');
@@ -193,8 +216,7 @@ export async function verifyWorkflow(page, out, check) {
   await capture(); await page.locator('.cam-top').getByRole('button', { name: '보관함', exact: true }).click();
   const migrated = await stored();
   check(migrated.shots.length === 2 && migrated.shots.some((s) => s.id === 1 && s.slotIndex === undefined) && migrated.session.size === 3240 && migrated.session.resolutionVersion === 1, 'legacy photos remain intact and new captures upgrade old resolution settings');
-  await shareMode('success'); await button('모두 저장 (공유)').click();
-  await page.waitForFunction(() => window.__shared?.length === 2);
+  await saveAllInOrder(2);
   check(await page.evaluate(() => window.__shared[0].photoDate === '2026:11:11 20:05:00'
     && window.__shared[0].lastModified === Date.UTC(2026, 10, 11, 11, 5) && window.__shared[0].koreanOffset), 'restored metadata-free legacy photo exports with its original date');
   await visible().locator('.grid .tile').first().click();
