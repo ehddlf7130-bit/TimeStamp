@@ -1,6 +1,6 @@
 // Port of tests/TimeStamp.Checks/Program.cs.
 import { describe, expect, it } from 'vitest';
-import { addMinutes, arrange, assign, assignMany, createPlan, createSinglePlan, exportName, hhmm, isoDate, koreaToday, nextPendingSlot, PlanError, stampDate, stampTime, wall } from '../src/core/patrol';
+import { addMinutes, arrange, assign, assignMany, createPlan, createSinglePlan, DEFAULT_KM_PER_30_MIN, exportName, formatKm, hhmm, isoDate, koreaToday, nextPendingSlot, patrolDistanceKm, PlanError, stampDate, stampTime, wall } from '../src/core/patrol';
 import { planFrom } from '../src/pages/planform';
 
 const date = wall(2026, 11, 9);
@@ -170,5 +170,28 @@ describe('PhotoPlacement', () => {
     assign(p, 2, a); expect(p[1]).toBe(null); expect(p[2]).toBe(a);        // move frees prior slot
     assign(p, 0, c); expect(p[0]).toBe(c); expect(p[2]).toBe(a);           // unassigned replaces target only
     assign(p, 0, c); expect(p.filter((x) => x === c)).toHaveLength(1);    // idempotent
+  });
+});
+
+describe('patrol distance', () => {
+  it('defaults to 0.8 km per 30 minutes', () => {
+    expect(DEFAULT_KM_PER_30_MIN).toBe(0.8);
+    expect(patrolDistanceKm(30)).toBe(0.8);
+    expect(patrolDistanceKm(createPlan(date, '00:00', '01:00').minutes)).toBe(1.6);
+    expect(patrolDistanceKm(createPlan(date, '20:00', '01:00').minutes)).toBe(8);
+  });
+  it('scales by entered rate and rounds to 0.01 km', () => {
+    expect(patrolDistanceKm(60, 1)).toBe(2);
+    expect(patrolDistanceKm(25)).toBe(0.67);
+    expect(patrolDistanceKm(0)).toBe(0);
+  });
+  it('rejects unusable rates', () => {
+    expect(() => patrolDistanceKm(30, -1)).toThrow(PlanError);
+    expect(() => patrolDistanceKm(30, NaN)).toThrow(PlanError);
+  });
+  it('formats without trailing zeros', () => {
+    expect(formatKm(8)).toBe('8km');
+    expect(formatKm(1.6)).toBe('1.6km');
+    expect(formatKm(0.67)).toBe('0.67km');
   });
 });

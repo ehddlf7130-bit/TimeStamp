@@ -66,6 +66,10 @@ export async function verifyWorkflow(page, out, check) {
   check((await visible().locator('.result').innerText()).includes('서로 달라야'), 'invalid range cannot advance');
   await visible().locator('.chip', { hasText: '20:00~01:00' }).click();
   check(await visible().locator('.result .big strong').textContent() === '60', 'overnight calculator still requires 60 photos');
+  check(await visible().locator('.distance-value').textContent() === '8km' && (await visible().locator('.result').innerText()).includes('8km'), 'overnight patrol distance defaults to 0.8km per 30 minutes');
+  await visible().getByLabel('30분당 순찰 거리(km)').fill('1');
+  check(await visible().locator('.distance-value').textContent() === '10km', 'patrol distance follows the entered rate');
+  await visible().getByLabel('30분당 순찰 거리(km)').fill('0.8');
   await screenshot('mobile-calculator');
   await configure('range', '23:00', '23:30', '순찰 촬영'); await next();
   check(await heading() === '촬영 준비' && await visible().locator('input[type=time]:visible').count() === 0, 'patrol preparation shares the calculator plan without asking for times again');
