@@ -77,6 +77,21 @@ export function createSinglePlan(date: Wall, timeText: string): PatrolPlan {
   return { start: at, end: at, slots: [at], count: 1, minutes: 0, outsideNormalHours: time > 60 && time < 20 * 60 };
 }
 
+/** Walking pace assumed for patrol distance: 0.8 km every 30 minutes. */
+export const DEFAULT_KM_PER_30_MIN = 0.8;
+
+/** Patrol distance in km for a patrol length, rounded to 0.01 km. */
+export function patrolDistanceKm(minutes: number, kmPer30 = DEFAULT_KM_PER_30_MIN): number {
+  if (!Number.isFinite(kmPer30) || kmPer30 < 0) throw new PlanError('30분당 거리는 0 이상의 숫자로 입력해 주세요.');
+  if (!Number.isFinite(minutes) || minutes < 0) throw new PlanError('순찰 시간을 확인해 주세요.');
+  return Math.round((minutes / 30) * kmPer30 * 100) / 100;
+}
+
+/** "8km", "0.67km" — at most two decimals, no trailing zeros. */
+export function formatKm(km: number): string {
+  return `${km.toFixed(2).replace(/\.?0+$/, '')}km`;
+}
+
 const WEEKDAYS = '일월화수목금토';
 
 export function stampDate(v: Wall): string {

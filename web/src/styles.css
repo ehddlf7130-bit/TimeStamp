@@ -192,3 +192,10 @@ dd { margin: 0; }
 }
 #toast.show { opacity: 1; transform: none; pointer-events: auto; }
 .toast-action { background: var(--accent); color: var(--accent-ink); min-height: 38px; flex: none; }
+
+/* calculator patrol distance */
+.distance { border-top: 1px solid var(--line); padding-top: 12px; margin-bottom: 12px; }
+.distance .field { margin-bottom: 8px; }
+.distance-result { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0; font-size: 14px; color: var(--muted); }
+.distance-value { font-size: 20px; font-weight: 700; color: var(--ink); text-align: right; }
+.distance-value.muted { font-size: 14px; font-weight: 400; color: var(--muted); }
