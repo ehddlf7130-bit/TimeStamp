@@ -3,7 +3,7 @@ import { exportFileName, exportName, nextPendingSlot, stampDate, stampTime, type
 import { koreaTimestamp, withCaptureTime } from '../core/exif';
 import { clear, errorMessage, focusHeading, h, toast } from '../dom';
 import { deleteShot, loadSession, loadShots, persist, saveCapture, saveSession, startPatrol, type PatrolSession, type Shot } from '../store/db';
-import { download, shareFiles, type NamedBlob } from '../stamp/export';
+import { download, OrderedShare, shareFiles, type NamedBlob } from '../stamp/export';
 import { canvasToBlob, centerCrop, makeCanvas, release, type StampRenderer } from '../stamp/renderer';
 import { PlanForm, planFrom, type PlanInputs } from './planform';
 
@@ -365,6 +365,52 @@ export class PatrolPage {
     }));
   }
 
+  /** Save every photo in planned-time order, one share sheet per tap (see OrderedShare). */
+  private saveInOrder() {
+    if (this.capturing || !this.shots.length) return;
+    const shots = [...this.shots].sort((a, b) => a.time - b.time);
+    const saver = new OrderedShare(this.named(shots));
+    const total = shots.length;
+    const thumb = h('img', { alt: '' });
+    const status = h('p', { role: 'status' });
+    const note = h('p', { class: 'muted' });
+    const nextButton = h('button', { class: 'primary block', onclick: () => void step() }, '다음 사진 저장');
+    let closed = false;
+    const close = (message?: string) => {
+      if (closed) return;
+      closed = true; dlg.close(); dlg.remove();
+      if (message) toast(message);
+    };
+    const stop = () => close(saver.saved ? `${total}장 중 ${saver.saved}장을 저장하고 중단했습니다.` : undefined);
+    const dlg = h('dialog', { class: 'viewer', 'aria-label': '시간순 저장' },
+      h('h2', null, '시간순 저장'), thumb, status, note, nextButton,
+      h('button', { class: 'ghost block', onclick: stop }, '중단'));
+    const render = (message = '') => {
+      const shot = shots[saver.saved];
+      thumb.src = this.url(shot);
+      status.textContent = `${saver.saved + 1} / ${total} · ${stampTime(new Date(shot.time))}`;
+      note.textContent = message || '사진 앱에 시간 순서대로 저장되도록 한 장씩 저장합니다.';
+      nextButton.textContent = saver.saved ? '다음 사진 저장' : '첫 사진 저장';
+    };
+    const step = async () => {
+      nextButton.disabled = true;
+      try {
+        const ok = await saver.next();
+        if (saver.done) return close(`${total}장을 시간순으로 저장했습니다.`);
+        render(ok ? '' : '저장을 취소했습니다. 같은 사진부터 다시 저장할 수 있습니다.');
+      } catch (e) {
+        // Unsupported sharing: nothing will work, so offer the per-photo downloads instead.
+        if (!saver.saved) return close(errorMessage(e));
+        render(errorMessage(e));
+      } finally { nextButton.disabled = false; }
+    };
+    dlg.addEventListener('cancel', (e) => { e.preventDefault(); stop(); });
+    render();
+    document.body.append(dlg); dlg.showModal();
+    // The first sheet opens within the gallery tap; each later photo needs its own tap.
+    void step();
+  }
+
   private async share(shots: Shot[]) {
     try { toast(await shareFiles(this.named(shots)) ? '사진 공유를 마쳤습니다.' : '공유를 취소했습니다.'); }
     catch (e) { toast(errorMessage(e)); }
@@ -381,8 +427,8 @@ export class PatrolPage {
         h('p', null, `${stampDate(plan.slots[0])} ${this.session.mode === 'single' ? this.session.start : `${this.session.start}~${this.session.end}`} · ${taken.size} / ${plan.count}장 촬영`)),
       h('div', { class: 'card' },
         h('button', { class: 'primary block big-btn', onclick: () => void this.resume() }, pending.length ? '이어서 촬영' : '사진 다시 찍기'),
-        h('button', { class: 'secondary block', disabled: !this.shots.length, onclick: () => void this.share(this.shots) }, '모두 저장 (공유)'),
-        h('p', { class: 'muted' }, '사진을 열면 개별 저장과 이미지 다운로드를 사용할 수 있습니다.'),
+        h('button', { class: 'secondary block', disabled: !this.shots.length, onclick: () => this.saveInOrder() }, '모두 저장 (공유)'),
+        h('p', { class: 'muted' }, '모두 저장은 사진 앱에 시간순으로 들어가도록 한 장씩 공유 시트를 엽니다. 사진을 열면 개별 저장과 이미지 다운로드를 사용할 수 있습니다.'),
         h('p', { class: pending.length ? 'muted' : 'ok' }, pending.length
           ? `남은 시각 ${pending.length}개: ${pending.slice(0, 8).map(stampTime).join(', ')}${pending.length > 8 ? ' …' : ''}`
           : '모든 계획 시각의 사진을 촬영했습니다.'),

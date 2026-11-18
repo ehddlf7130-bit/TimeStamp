@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { canShareFiles, shareFiles } from '../src/stamp/export';
+import { canShareFiles, OrderedShare, shareFiles, type NamedBlob } from '../src/stamp/export';
 
 const items = [{ name: '001_20261111_2317.jpg', blob: new Blob(['photo bytes'], { type: 'image/jpeg' }) }];
 afterEach(() => vi.unstubAllGlobals());
@@ -38,5 +38,43 @@ describe('photo sharing', () => {
   it('propagates a real sharing failure', async () => {
     vi.stubGlobal('navigator', { canShare: () => true, share: () => Promise.reject(new Error('Sharing failed')) });
     await expect(shareFiles(items)).rejects.toThrow('Sharing failed');
+  });
+});
+
+describe('ordered saving', () => {
+  const photos: NamedBlob[] = ['001.jpg', '002.jpg', '003.jpg'].map((name) => ({ name, blob: new Blob([name], { type: 'image/jpeg' }) }));
+
+  it('shares one photo per call, in the given chronological order', async () => {
+    const share = vi.fn().mockResolvedValue(true);
+    const saver = new OrderedShare(photos, share);
+    while (!saver.done) await saver.next();
+    expect(share.mock.calls.map(([files]) => files.map((f: NamedBlob) => f.name))).toEqual([['001.jpg'], ['002.jpg'], ['003.jpg']]);
+    expect(saver.saved).toBe(3);
+  });
+  it('starts the share synchronously so the native sheet keeps the tap activation', () => {
+    const share = vi.fn().mockResolvedValue(true);
+    void new OrderedShare(photos, share).next();
+    expect(share).toHaveBeenCalledTimes(1);
+  });
+  it('retries the same photo after a cancellation or failure', async () => {
+    const share = vi.fn().mockResolvedValueOnce(true).mockResolvedValueOnce(false)
+      .mockRejectedValueOnce(new Error('Sharing failed')).mockResolvedValue(true);
+    const saver = new OrderedShare(photos, share);
+    expect(await saver.next()).toBe(true);
+    expect(await saver.next()).toBe(false);
+    await expect(saver.next()).rejects.toThrow('Sharing failed');
+    expect(saver.current?.name).toBe('002.jpg');
+    await saver.next(); await saver.next();
+    expect(share.mock.calls.map(([files]) => files[0].name)).toEqual(['001.jpg', '002.jpg', '002.jpg', '002.jpg', '003.jpg']);
+    expect(saver.done).toBe(true);
+  });
+  it('ignores a second tap while a share sheet is still open', async () => {
+    let finish!: (v: boolean) => void;
+    const share = vi.fn().mockReturnValueOnce(new Promise<boolean>((r) => { finish = r; })).mockResolvedValue(true);
+    const saver = new OrderedShare(photos, share);
+    const first = saver.next();
+    expect(await saver.next()).toBe(false);
+    finish(true); await first;
+    expect(share).toHaveBeenCalledTimes(1); expect(saver.saved).toBe(1);
   });
 });
